@@ -41,3 +41,25 @@ Ensure [Node.js](https://nodejs.org/en/download/) and [npm](http://npmjs.com) ar
    ```
 
 Visit the application in your browser at `http://localhost:8000`.
+
+## Building for Production
+
+For deployment in a production environment:
+
+```bash
+npm run build
+```
+
+## Technology Stack
+
+- [Node.js](https://nodejs.org/en/) for a stable runtime environment.
+- [Express](https://expressjs.com/) for efficient server utilities.
+- [React](https://reactjs.org/) for building the user interface.
+- [Chakra UI](https://chakra-ui.com/) for a modular, accessible component library.
+- [MongoDB](https://www.mongodb.com/) as the chosen NoSQL database.
+- [Mongoose](https://mongoosejs.com/) for object data modeling and DB actions.
+- [Passport.js](http://www.passportjs.org/) for user authentication procedures.
+- [bcrypt](https://www.npmjs.com/package/bcrypt) for secure password hashing.
+- [dotenv](https://www.npmjs.com/package/dotenv) to handle environment variables.
+
+---
