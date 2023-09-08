@@ -41,7 +41,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(compression());
 
-app.use("/", indexRouter);
+app.use("/api", indexRouter);
 
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
