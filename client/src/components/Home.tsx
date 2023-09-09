@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Box, Heading } from "@chakra-ui/react";
-
+import CardItem from "./cardItem";
 const Home = () => {
   const [message, setMessage] = useState([]);
 
@@ -25,16 +25,17 @@ const Home = () => {
   }, []);
   console.log(message);
   return (
-    <Box className="App">
+    <Box>
       {message.map(message => (
-        <Box>
-          <Box>{message._id}</Box>
-          <Box>{message.title}</Box>
-          <Box>{message.comments}</Box>
-          <Box>{message.time}</Box>
-          <Box>{message.published}</Box>
-        </Box>
-      ))}{" "}
+        <CardItem
+          key={message._id}
+          title={message.title}
+          comments={message.comments}
+          time={message.time}
+          content={message.content}
+          published={message.published}
+        />
+      ))}
     </Box>
   );
 };
