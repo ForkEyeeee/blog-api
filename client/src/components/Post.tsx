@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { Box, Heading } from "@chakra-ui/react";
-import CardItem from "./cardItem";
-const Home = () => {
+import { useLocation } from "react-router-dom";
+import { Box, Stack, Text, HStack, VStack, Flex } from "@chakra-ui/react";
+const Post = () => {
   const [message, setMessage] = useState([]);
-
+  const location = useLocation().pathname;
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5173/api/posts");
+        const response = await fetch(`http://localhost:5173/api${location}`);
         // console.log(response);
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -17,28 +17,22 @@ const Home = () => {
         // console.log(text);
         const data = JSON.parse(text);
         setMessage(data.message);
+        console.log(data);
       } catch (error) {
         console.error(error);
       }
     };
     fetchData();
   }, []);
-  console.log(message);
+
   return (
     <Box>
-      {message.map(message => (
-        <CardItem
-          key={message._id}
-          url={message._id}
-          title={message.title}
-          comments={message.comments}
-          time={message.time}
-          content={message.content}
-          published={message.published}
-        />
-      ))}
+      <VStack>
+        <Text fontSize="3xl">{message.title}</Text>
+        <Text fontSize={"2xl"}>{message.content}</Text>
+      </VStack>
     </Box>
   );
 };
 
-export default Home;
+export default Post;

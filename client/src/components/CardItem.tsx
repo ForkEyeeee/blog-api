@@ -10,8 +10,12 @@ import {
   Stack,
   Divider,
 } from "@chakra-ui/react";
+import { Link } from "@chakra-ui/react";
+import { Link as ReactRouterLink } from "react-router-dom";
+import { Link as ChakraLink, LinkProps } from "@chakra-ui/react";
 
-const CardItem = ({ title, comments, content, time, published }) => {
+const CardItem = ({ url, title, comments, content, time, published }) => {
+  console.log(`/posts/${url}`);
   return (
     <Card>
       <CardHeader pb={0}>
@@ -24,9 +28,9 @@ const CardItem = ({ title, comments, content, time, published }) => {
             <Text fontSize={"2xs"}>{time}</Text>
           </Box>
           <Box>
-            <Text pt="2" fontSize="sm" fontWeight={"light-bold"}>
+            <ChakraLink as={ReactRouterLink} to={`/posts/${url}`}>
               {content}
-            </Text>
+            </ChakraLink>
           </Box>
           <Divider />
         </Stack>

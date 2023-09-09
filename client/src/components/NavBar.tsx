@@ -1,6 +1,7 @@
 import { Box, HStack, Badge, Text, Image, Flex } from "@chakra-ui/react";
 import { FaHome, FaShoppingCart } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link as ReactRouterLink } from "react-router-dom";
+import { Link as ChakraLink, LinkProps } from "@chakra-ui/react";
 const NavBar = () => {
   return (
     <Box
@@ -12,7 +13,9 @@ const NavBar = () => {
       textTransform={"capitalize"}
     >
       <HStack justifyContent="flex-end">
-        <Text>Home</Text>
+        <ChakraLink as={ReactRouterLink} to={`/`}>
+          Home
+        </ChakraLink>{" "}
         <Text>About</Text>
         <Text>Login</Text>
       </HStack>

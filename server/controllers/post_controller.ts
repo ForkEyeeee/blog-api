@@ -24,6 +24,15 @@ exports.delete_post_form_delete = asyncHandler(
   }
 );
 
+exports.update_post_form_get = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const post = await Post.findOne({ _id: req.params.postid });
+    // console.log(req.params.postid);
+    console.log(req.params.postid);
+    res.json({ message: post });
+  }
+);
+
 exports.update_post_form_put = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     res.json({ message: "PUT Update a Post" });
@@ -36,12 +45,6 @@ exports.update_post_form_put = asyncHandler(
 //     res.json({ message: "GET Create a Post" });
 //   }
 // );
-
-exports.update_post_form_get = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    res.json({ message: "GET Update a Post" });
-  }
-);
 
 exports.create_post_form_post = [
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
