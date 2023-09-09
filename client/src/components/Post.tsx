@@ -1,36 +1,25 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Box, Stack, Text, HStack, VStack, Flex } from "@chakra-ui/react";
+import useDataFetching from "../hooks/useDataFetching";
+import Comment from "./Comment";
 const Post = () => {
-  const [message, setMessage] = useState([]);
-  const location = useLocation().pathname;
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`http://localhost:5173/api${location}`);
-        // console.log(response);
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-
-        const text = await response.text();
-        // console.log(text);
-        const data = JSON.parse(text);
-        setMessage(data.message);
-        console.log(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-  }, []);
-
+  const location = `http://localhost:5173/api${useLocation().pathname}`;
+  const [data, loading, error] = useDataFetching(location);
+  console.log(data);
+  console.log(location);
+  console.log(error);
   return (
     <Box>
-      <VStack>
-        <Text fontSize="3xl">{message.title}</Text>
-        <Text fontSize={"2xl"}>{message.content}</Text>
-      </VStack>
+      {data && (
+        <>
+          <Text fontSize="3xl">{data.post.title}</Text>
+          <Text fontSize="3xl">{data.post.content}</Text>
+          {data.comments.map(comment => (
+            <Comment comment={comment} />
+          ))}
+        </>
+      )}
     </Box>
   );
 };
