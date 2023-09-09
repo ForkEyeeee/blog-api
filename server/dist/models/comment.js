@@ -3,7 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const CommentSchema = new Schema({
-    username: { type: String, required: true },
+    username: { type: String },
+    content: { type: String },
+    post: [{ type: Schema.Types.ObjectId, ref: "posts" }],
     time: { type: String, required: true },
 }, { collection: "comments" });
 CommentSchema.virtual("url").get(function () {

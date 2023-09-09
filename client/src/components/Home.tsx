@@ -7,7 +7,7 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5173/api/create-post");
+        const response = await fetch("http://localhost:5173/api/posts");
         console.log(response);
         if (!response.ok) {
           throw new Error("Network response was not ok");

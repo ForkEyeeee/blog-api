@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const PostSchema = new Schema({
     title: { type: String, maxLength: 100 },
+    comments: [{ type: Schema.Types.ObjectId, ref: "comments" }],
     time: { type: String },
     published: { type: Boolean },
 }, { collection: "posts" });
