@@ -6,7 +6,7 @@ const CommentSchema = new Schema(
     username: { type: String, required: true },
     time: { type: String, required: true },
   },
-  { collection: "author" }
+  { collection: "comments" }
 );
 
 CommentSchema.virtual("url").get(function (): string {
@@ -14,4 +14,4 @@ CommentSchema.virtual("url").get(function (): string {
   return `${this._id}`;
 });
 
-module.exports = mongoose.model("Message", CommentSchema);
+module.exports = mongoose.model("Comment", CommentSchema);

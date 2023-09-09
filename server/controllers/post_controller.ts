@@ -6,10 +6,40 @@ const { body, validationResult } = require("express-validator");
 
 const asyncHandler = require("express-async-handler");
 
-exports.create_post_form_get = asyncHandler(
+exports.post_list_get = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    console.log(req);
-    res.json({ message: "Create a Post" });
+    const posts = await Post.find({});
+    res.json({ message: posts });
+  }
+);
+
+exports.delete_post_form_get = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    res.json({ message: "GET Delete a Post" });
+  }
+);
+exports.delete_post_form_delete = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    res.json({ message: "DELETE Delete a Post" });
+  }
+);
+
+exports.update_post_form_put = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    res.json({ message: "PUT Update a Post" });
+  }
+);
+
+// exports.create_post_form_get = asyncHandler(
+//   async (req: Request, res: Response, next: NextFunction) => {
+//     console.log(req);
+//     res.json({ message: "GET Create a Post" });
+//   }
+// );
+
+exports.update_post_form_get = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    res.json({ message: "GET Update a Post" });
   }
 );
 
@@ -21,6 +51,6 @@ exports.create_post_form_post = [
       published: req.body.published,
     });
     await newPost.save();
-    res.json({ message: "Success" });
+    res.json({ message: newPost });
   }),
 ];

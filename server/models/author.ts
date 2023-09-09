@@ -14,4 +14,4 @@ AuthorSchema.virtual("url").get(function (): string {
   return `${this._id}`;
 });
 
-module.exports = mongoose.model("Message", AuthorSchema);
+module.exports = mongoose.model("Author", AuthorSchema);

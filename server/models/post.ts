@@ -7,7 +7,7 @@ const PostSchema = new Schema(
     time: { type: String },
     published: { type: Boolean },
   },
-  { collection: "messages" }
+  { collection: "posts" }
 );
 
 PostSchema.virtual("url").get(function (): string {
@@ -15,4 +15,4 @@ PostSchema.virtual("url").get(function (): string {
   return `${this._id}`;
 });
 
-module.exports = mongoose.model("Message", PostSchema);
+module.exports = mongoose.model("Post", PostSchema);
