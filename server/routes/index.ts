@@ -3,13 +3,23 @@ var express = require("express");
 var router = express.Router();
 const post_controller = require("../controllers/post_controller");
 const comment_controller = require("../controllers/comment_controller");
+const index_controller = require("../controllers/index_controller");
+const auth_controller = require("../controllers/auth_controller");
 /* GET home page. */
 router.get("/", (req, res) => {
-  res.json({ message: "Homepage" });
+  res.redirect("/posts");
 });
+//Index routes
+router.get("/users/new", index_controller.sign_up_form_get);
+// router.get("/session/new", index_controller.login_form_get);
+// router.get("/membership", index_controller.membership_form_get);
+// router.post("/membership", index_controller.membership_form_post);
+//Auth routes
+router.post("/users/new", auth_controller.sign_up_form_post);
+router.post("/session/new", auth_controller.login_form_post);
+// router.get("/logout", auth_controller.logout_get);
 
 //Post routes
-// router.get("/posts", post_controller.create_post_form_get);
 router.post("/posts", post_controller.create_post_form_post);
 router.get("/posts/:postid", post_controller.update_post_form_get);
 router.put("/posts/:postid", post_controller.update_post_form_put);

@@ -43,7 +43,7 @@ exports.update_post_form_get = asyncHandler(async (req, res, next) => {
         username: 1,
         content: 1,
         time: 1,
-        _id: 0,
+        _id: 1,
     });
     // const test = await Comment.findOne({
     //   _id: "64fc0b2b0efb13c88b2e59ba",

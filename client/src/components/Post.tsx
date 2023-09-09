@@ -16,7 +16,7 @@ const Post = () => {
           <Text fontSize="3xl">{data.post.title}</Text>
           <Text fontSize="3xl">{data.post.content}</Text>
           {data.comments.map(comment => (
-            <Comment comment={comment} />
+            <Comment key={comment._id} comment={comment} />
           ))}
         </>
       )}

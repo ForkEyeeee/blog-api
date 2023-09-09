@@ -56,27 +56,57 @@ async function createPosts() {
 }
 async function createCommentsForAllPosts() {
     console.log("Adding comments");
-    const commentData = [
-        "Great post! Loved it.",
-        "Very insightful, thanks for sharing.",
-        "I didn't know that, interesting.",
-        "Amazing! Please write more on this topic.",
-        "This was a helpful read, looking forward for more!",
+    const uniqueCommentData = [
+        [
+            "The wonders of nature never cease to amaze me.",
+            "Your depiction of nature's splendor is truly breathtaking.",
+            "I felt like I was right there, amidst the mountains and streams.",
+            "Nature indeed has its own way of healing our souls.",
+            "This article reminded me of my last camping trip. Pure bliss!",
+        ],
+        [
+            "AI has always intrigued me. Thanks for shedding light on it.",
+            "This really simplifies the complex world of AI.",
+            "I wonder how AI will shape our future in the next decade.",
+            "It's fascinating to see AI's influence across industries.",
+            "The possibilities with AI seem endless. Great read!",
+        ],
+        [
+            "The Himalayas are a dream destination for me.",
+            "Trekking in the Himalayas is on my bucket list. Thanks for the virtual journey.",
+            "I could almost feel the cold mountain breeze while reading this.",
+            "The Himalayan flora and fauna are truly a sight to behold.",
+            "This brought back memories of my own adventure there.",
+        ],
+        [
+            "The ocean's depths have always been a mystery to mankind.",
+            "I've always been fascinated by marine life. This was an engaging read.",
+            "It's surprising how little we know about our own planet's oceans.",
+            "The colorful marine life has always been a treat to the eyes.",
+            "This makes me want to take up scuba diving!",
+        ],
+        [
+            "Tolkien's world is evergreen. Thanks for this journey through Middle Earth.",
+            "From elves to hobbits, Middle Earth has it all. Loved your article.",
+            "The tales of heroism and friendship in Tolkien's world resonate even today.",
+            "Your article took me right back to the Shire. Wonderful read.",
+            "Middle Earth's adventures are timeless indeed. Thanks for this.",
+        ],
     ];
-    for (let post of posts) {
-        for (let content of commentData) {
+    for (let i = 0; i < posts.length; i++) {
+        for (let content of uniqueCommentData[i]) {
             const comment = new Comment({
                 username: `User_${Math.floor(Math.random() * 1000)}`,
                 content: content,
-                post: post._id,
+                post: posts[i]._id,
                 time: new Date().toISOString(),
             });
             await comment.save();
-            post.comments.push(comment._id);
+            posts[i].comments.push(comment._id);
             comments.push(comment);
         }
         // Save the post after updating its comments
-        await post.save();
+        await posts[i].save();
     }
-    console.log("Added 5 comments for each post");
+    console.log("Added 5 unique comments for each post");
 }

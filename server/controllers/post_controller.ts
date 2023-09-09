@@ -19,6 +19,7 @@ exports.delete_post_form_get = asyncHandler(
     res.json({ message: "GET Delete a Post" });
   }
 );
+
 exports.delete_post_form_delete = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     res.json({ message: "DELETE Delete a Post" });
@@ -58,7 +59,7 @@ exports.update_post_form_get = asyncHandler(
       username: 1,
       content: 1,
       time: 1,
-      _id: 0,
+      _id: 1,
     });
 
     // const test = await Comment.findOne({

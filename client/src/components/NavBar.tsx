@@ -17,7 +17,12 @@ const NavBar = () => {
           Home
         </ChakraLink>{" "}
         <Text>About</Text>
-        <Text>Login</Text>
+        <ChakraLink as={ReactRouterLink} to={`/users/new`}>
+          SignUp
+        </ChakraLink>{" "}
+        <ChakraLink as={ReactRouterLink} to={`/session/new`}>
+          Login
+        </ChakraLink>{" "}
       </HStack>
     </Box>
   );
