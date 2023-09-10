@@ -7,6 +7,7 @@ const passport = require("passport");
 const { body, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 const asyncHandler = require("express-async-handler");
+exports.verify_token = asyncHandler(async (req, res, next) => { });
 exports.sign_up_form_post = [
     body("username", "email must not be empty.")
         .trim()

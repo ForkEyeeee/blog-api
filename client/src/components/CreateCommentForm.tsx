@@ -47,20 +47,36 @@ const CreateCommentForm = ({ postid }) => {
       );
     }
   };
+  function parseJwt(token) {
+    if (!token) {
+      return;
+    }
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace("-", "+").replace("_", "/");
+    return JSON.parse(window.atob(base64));
+  }
 
+  let data = parseJwt(token);
   return (
-    <Box>
-      <Box position="relative" padding="10">
-        <Divider />
-        <AbsoluteCenter bg="white" px="4">
-          Add Comment
-        </AbsoluteCenter>
-      </Box>
-      <form onSubmit={handleSubmit}>
-        <Textarea name="comment" placeholder="Here is a sample placeholder" />
-        <Button type="submit">Add</Button>
-      </form>
-    </Box>
+    <>
+      {data && (
+        <Box>
+          <Box position="relative" padding="10">
+            <Divider />
+            <AbsoluteCenter bg="white" px="4">
+              Add Comment
+            </AbsoluteCenter>
+          </Box>
+          <form onSubmit={handleSubmit}>
+            <Textarea
+              name="comment"
+              placeholder="Here is a sample placeholder"
+            />
+            <Button type="submit">Add</Button>
+          </form>
+        </Box>
+      )}
+    </>
   );
 };
 

@@ -20,10 +20,26 @@ import { useLocation } from "react-router-dom";
 const Comment = ({ comment }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [inputText, setInputText] = useState("");
+
   const navigate = useNavigate();
   const token = localStorage.getItem("jwt");
   const location = `http://localhost:5173/api${useLocation().pathname}`;
-  // console.log(comment._id);
+  // useEffect(() => {
+
+  //   data = ;
+  //   return
+  // }, [token]);
+  function parseJwt(token) {
+    if (!token) {
+      return;
+    }
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace("-", "+").replace("_", "/");
+    return JSON.parse(window.atob(base64));
+  }
+
+  let data = parseJwt(token);
+
   const handleEditMode = () => {
     setIsEditMode(() => !isEditMode);
   };
@@ -80,31 +96,33 @@ const Comment = ({ comment }) => {
                 />
                 <Text fontWeight={"bold"}>{comment.username}</Text>
               </HStack>
-              {!isEditMode ? (
-                <Box onClick={handleEditMode}>
-                  <EditIcon boxSize={6} />
-                </Box>
-              ) : (
-                <HStack>
-                  <Button
-                    // onClick={handleEditMode}
-                    type="submit"
-                    colorScheme="green"
-                    variant="ghost"
-                    size="sm"
-                  >
-                    Save
-                  </Button>
-                  <Button
-                    onClick={handleEditMode}
-                    size="xs"
-                    colorScheme="red"
-                    variant="outline"
-                  >
-                    Cancel
-                  </Button>
-                </HStack>
-              )}
+              {data !== undefined ? (
+                data.username !== comment.username ? undefined : !isEditMode ? (
+                  <Box onClick={handleEditMode}>
+                    <EditIcon boxSize={6} />
+                  </Box>
+                ) : (
+                  <HStack>
+                    <Button
+                      // onClick={handleEditMode}
+                      type="submit"
+                      colorScheme="green"
+                      variant="ghost"
+                      size="sm"
+                    >
+                      Save
+                    </Button>
+                    <Button
+                      onClick={handleEditMode}
+                      size="xs"
+                      colorScheme="red"
+                      variant="outline"
+                    >
+                      Cancel
+                    </Button>
+                  </HStack>
+                )
+              ) : null}
             </HStack>
             <Flex justifyContent={"flex-end"} minW={"100%"}>
               {" "}

@@ -8,6 +8,10 @@ const jwt = require("jsonwebtoken");
 
 const asyncHandler = require("express-async-handler");
 
+exports.verify_token = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {}
+);
+
 exports.sign_up_form_post = [
   body("username", "email must not be empty.")
     .trim()
