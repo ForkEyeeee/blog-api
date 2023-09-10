@@ -3,8 +3,10 @@ require("dotenv").config();
 import { Request, Response, NextFunction } from "express";
 const Comment = require("../models/comment");
 const { body, validationResult } = require("express-validator");
-
+const User = require("../models/user");
 const asyncHandler = require("express-async-handler");
+const jwt = require("jsonwebtoken");
+const Post = require("../models/post");
 
 exports.create_comment_form_get = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -12,11 +14,42 @@ exports.create_comment_form_get = asyncHandler(
   }
 );
 
-exports.create_comment_form_post = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    res.json({ message: "POST Create a Comment" });
-  }
-);
+exports.create_comment_form_post = [
+  body("comment", "Name must not be empty.")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  asyncHandler(
+    async (req: Request, res: Response, next: NextFunction) => {
+      // const errors = validationResult(req);
+      // if (!errors.isEmpty()) {
+      //   return res.status(400).json({ errors: errors.array() });
+      // } else {
+      const usertoken = req.headers.authorization;
+      const token = usertoken.split(" ");
+      const decoded = jwt.verify(token[1], process.env.signature);
+      const newComment = new Comment({
+        username: decoded.username,
+        content: req.body.comment,
+        post: req.params.postid,
+        time: new Date().toJSON().slice(0, 10).split("-").reverse().join("/"),
+      });
+      await newComment.save();
+      console.log(newComment);
+      await Post.findOneAndUpdate(
+        { _id: req.params.postid },
+        { $push: { comments: newComment } }
+      );
+      await User.findOneAndUpdate(
+        { _id: decoded.userId },
+        { $push: { comments: newComment } }
+      );
+      console.log(decoded);
+      res.redirect(`/`);
+    }
+    // }
+  ),
+];
 
 exports.update_comment_form_get = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
