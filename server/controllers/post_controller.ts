@@ -9,7 +9,7 @@ const asyncHandler = require("express-async-handler");
 
 exports.post_list_get = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    console.log("REACHED");
+    console.log("Unprotected route hit");
     const posts = await Post.find({});
     res.json({ message: posts });
   }

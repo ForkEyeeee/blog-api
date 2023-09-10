@@ -16,6 +16,7 @@ const auth_controller = require("../controllers/auth_controller");
 //Auth routes
 // router.post("/users/new", auth_controller.sign_up_form_post);
 // router.post("/session/new", auth_controller.login_form_post);
+router.get("/posts/:postid", post_controller.post_get);
 // // router.get("/logout", auth_controller.logout_get);
 // //Post routes
 // // router.post("/posts", post_controller.create_post_form_post);
@@ -23,7 +24,7 @@ const auth_controller = require("../controllers/auth_controller");
 // // router.put("/posts/:postid", post_controller.update_post_form_put);
 // // router.get("/posts/:postid", post_controller.delete_post_form_get);
 // // router.delete("/posts/:postid", post_controller.delete_post_form_delete);
-router.get("/posts/test", post_controller.post_list_get);
+router.get("/posts", post_controller.post_list_get);
 // //Comment routes
 // router.get("/comments", comment_controller.comment_list_get);
 // router.post("/comments", comment_controller.create_comment_form_post);
@@ -34,4 +35,5 @@ router.get("/posts/test", post_controller.post_list_get);
 //   "/comments/:commentid",
 //   comment_controller.delete_comment_form_delete
 // );
+//unprotectedRoutes.ts
 module.exports = router;

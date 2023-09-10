@@ -50,7 +50,7 @@ function verifyToken(req, res, next) {
         return res.status(401).json({ success: false, message: "Invalid token." });
     }
 }
-app.use("/api/test", unprotectedRoutes);
+app.use("/api", unprotectedRoutes);
 app.use("/api", verifyToken, protectedRoutes);
 // Set up mongoose connection
 const mongoose = require("mongoose");

@@ -16,7 +16,6 @@ router.post("/session/new", auth_controller.login_form_post);
 
 //Post routes
 // router.post("/posts", post_controller.create_post_form_post);
-router.get("/posts/:postid", post_controller.post_get);
 // router.put("/posts/:postid", post_controller.update_post_form_put);
 // router.get("/posts/:postid", post_controller.delete_post_form_get);
 // router.delete("/posts/:postid", post_controller.delete_post_form_delete);
@@ -32,5 +31,7 @@ router.get("/posts/:postid", post_controller.post_get);
 //   "/comments/:commentid",
 //   comment_controller.delete_comment_form_delete
 // );
+
+// protectedRoutes.ts
 
 module.exports = router;

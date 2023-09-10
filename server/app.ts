@@ -55,7 +55,7 @@ function verifyToken(req: Request, res: Response, next: NextFunction) {
   }
 }
 
-app.use("/api/test", unprotectedRoutes);
+app.use("/api", unprotectedRoutes);
 app.use("/api", verifyToken, protectedRoutes);
 
 // Set up mongoose connection

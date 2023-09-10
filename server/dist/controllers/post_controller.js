@@ -6,7 +6,7 @@ const Comment = require("../models/comment");
 const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 exports.post_list_get = asyncHandler(async (req, res, next) => {
-    console.log("REACHED");
+    console.log("Unprotected route hit");
     const posts = await Post.find({});
     res.json({ message: posts });
 });
