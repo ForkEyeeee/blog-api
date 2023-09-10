@@ -4,6 +4,7 @@ import Post from "./components/Post";
 import NavBar from "./components/NavBar";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
+import Aboutus from "./components/AboutUs";
 function App() {
   return (
     <>
@@ -13,6 +14,7 @@ function App() {
         <Route path="/posts/:postid" element={<Post />} />
         <Route path="/users/new" element={<SignUp />} />
         <Route path="/session/new" element={<Login />} />
+        <Route path="/Aboutus" element={<Aboutus />} />
       </Routes>
     </>
   );

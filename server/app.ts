@@ -80,8 +80,7 @@ app.use(function (err: any, req: any, res: any, next: any) {
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
   // render the error page
-  res.status(err.status || 500);
-  res.render("../views/error");
+  res.status(err.status || 500).json({ message: res.locals.error });
 });
 
 module.exports = app;

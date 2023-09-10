@@ -85,7 +85,7 @@ exports.login_form_post = asyncHandler(
     try {
       // Creating jwt token
       token = jwt.sign(
-        { username: existingUser.username, password: existingUser.password },
+        { userId: existingUser._id, username: existingUser.username },
         process.env.signature,
         { expiresIn: "1h" }
       );
@@ -99,7 +99,6 @@ exports.login_form_post = asyncHandler(
       success: true,
       data: {
         username: existingUser.username,
-        password: existingUser.password,
         token: token,
       },
     });

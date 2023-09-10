@@ -26,6 +26,7 @@ router.get("/posts/:postid", post_controller.post_get);
 // // router.get("/posts/:postid", post_controller.delete_post_form_get);
 // // router.delete("/posts/:postid", post_controller.delete_post_form_delete);
 router.get("/posts", post_controller.post_list_get);
+router.post("/session/new", auth_controller.login_form_post);
 
 // //Comment routes
 // router.get("/comments", comment_controller.comment_list_get);

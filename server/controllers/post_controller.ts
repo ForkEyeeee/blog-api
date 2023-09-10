@@ -59,3 +59,9 @@ exports.create_post_form_post = [
     res.json({ message: newPost });
   }),
 ];
+
+exports.about_us_get = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    res.json({ message: "ABOUT ME" });
+  }
+);
