@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Box, Stack, Text, HStack, VStack, Flex } from "@chakra-ui/react";
-import useDataFetching from "../hooks/useDataFetching";
+import useDataFetching from "../hooks/fetch";
 import Comment from "./Comment";
 import {
   FormControl,

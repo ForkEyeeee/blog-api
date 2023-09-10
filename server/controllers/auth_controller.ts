@@ -1,8 +1,10 @@
+require("dotenv").config();
 import { Request, Response, NextFunction } from "express";
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const { body, validationResult } = require("express-validator");
+const jwt = require("jsonwebtoken");
 
 const asyncHandler = require("express-async-handler");
 
@@ -16,70 +18,101 @@ exports.sign_up_form_post = [
     .isLength({ min: 1 })
     .escape(),
   body("confirmpassword").custom((value, { req }) => {
-    if (value === req.body.password) {
-      return true;
-    } else {
+    if (value !== req.body.password) {
       throw new Error("Passwords do not match");
     }
+    return true;
   }),
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
-    console.log(req.body);
+
     if (!errors.isEmpty()) {
-      // res.redirect("/users/new");
       return res.status(400).json({ errors: errors.array() });
-      // console.log(errors);
-    } else {
-      const newUser = new User({
-        username: req.body.username,
-        password: req.body.password,
-        comments: [],
+    }
+
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const newUser = new User({
+      username: req.body.username,
+      password: hashedPassword,
+      comments: [],
+    });
+
+    try {
+      await newUser.save();
+
+      res.status(201).json({
+        success: true,
+        data: {
+          username: newUser.username,
+          password: newUser.password,
+        },
       });
-      bcrypt.hash(
-        newUser.password,
-        10,
-        async (err: object, hashedPassword: string) => {
-          if (err) {
-            throw new Error("Hashing error");
-          }
-          newUser.password = hashedPassword;
-          await newUser.save();
-          console.log("saved");
-          // req.user ? res.redirect("/home") : res.redirect("/login");
-          res.redirect("/");
-        }
-      );
+    } catch (err) {
+      console.error(err);
+      const error = new Error("Error! Something went wrong.");
+      return next(error);
     }
   }),
 ];
 
-// exports.sign_up_form_post = asyncHandler(
-//   async (req: Request, res: Response, next: NextFunction) => {
-//     console.log(req.body);
-
-//     res.json({ message: "yoo" });
-//     // res.redirect("/posts");
-//   }
-// );
 exports.login_form_post = asyncHandler(
-  passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/",
-    failureMessage: true,
-  })
-  // console.log(req.user)
-  // async (req: Request, res: Response, next: NextFunction) => {
-  //   res.json({ message: "login post" });
-  // }
-);
-
-exports.logout_get = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    req.logout(function (err: string) {
-      if (err) {
-        return next(err);
-      }
-      res.redirect("/home");
+    let { username, password } = req.body;
+
+    let existingUser;
+    try {
+      existingUser = await User.findOne({ username: username });
+    } catch (err) {
+      const error = new Error("Error! Something went wrong.");
+      return next(error);
+    }
+
+    if (!existingUser) {
+      const error = new Error("Wrong details please check at once");
+      return next(error);
+    }
+
+    // Compare the password using bcrypt
+    const isMatch = await bcrypt.compare(password, existingUser.password);
+    if (!isMatch) {
+      console.log(existingUser);
+      console.log(password);
+      const error = new Error("Wrong details please check at once");
+      return next(error);
+    }
+
+    let token;
+    try {
+      // Creating jwt token
+      token = jwt.sign(
+        { username: existingUser.username, password: existingUser.password },
+        process.env.signature,
+        { expiresIn: "1h" }
+      );
+    } catch (err) {
+      console.log(err);
+      const error = new Error("Error! Something went wrong.");
+      return next(error);
+    }
+
+    res.status(200).json({
+      success: true,
+      data: {
+        username: existingUser.username,
+        password: existingUser.password,
+        token: token,
+      },
     });
   }
 );
+
+// exports.logout_get = asyncHandler(
+//   async (req: Request, res: Response, next: NextFunction) => {
+//     req.logout(function (err: string) {
+//       if (err) {
+//         return next(err);
+//       }
+//       res.redirect("/home");
+//     });
+//   }
+// );

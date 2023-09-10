@@ -4,10 +4,6 @@ require("dotenv").config();
 const User = require("../models/user");
 const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
-exports.sign_up_form_get = asyncHandler(async (req, res, next) => {
-    console.log(req.body);
-    res.json({ message: "SIGN UP FORM" });
-});
 // exports.login_form_get = asyncHandler(
 //   async (req: Request, res: Response, next: NextFunction) => {
 //     // const lastError = req.session.messages
