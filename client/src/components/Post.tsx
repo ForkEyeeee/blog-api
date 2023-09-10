@@ -14,8 +14,10 @@ const Post = () => {
     <Box>
       {data && (
         <>
-          <Text fontSize="3xl">{data.post.title}</Text>
-          <Text fontSize="3xl">{data.post.content}</Text>
+          <Text fontSize="3xl" fontWeight={"bold"}>
+            {data.post.title}
+          </Text>
+          <Text>{data.post.content}</Text>
           {data.comments.map(comment => (
             <Comment key={comment._id} comment={comment} />
           ))}
