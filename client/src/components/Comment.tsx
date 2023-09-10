@@ -14,60 +14,117 @@ import {
   Divider,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const Comment = ({ comment }) => {
   const [isEditMode, setIsEditMode] = useState(false);
-
+  const [inputText, setInputText] = useState("");
+  const navigate = useNavigate();
+  const token = localStorage.getItem("jwt");
+  const location = `http://localhost:5173/api${useLocation().pathname}`;
+  // console.log(comment._id);
   const handleEditMode = () => {
     setIsEditMode(() => !isEditMode);
   };
+  const handleInputOnChange = e => {
+    setInputText(e.target.value);
+  };
+  const handleSubmit = async e => {
+    e.preventDefault();
+    handleEditMode();
+    const formData = new FormData(e.target);
+    const userComment = formData.get("user_comment");
+    // console.log(userComment);
+    try {
+      const response = await fetch(location, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          userComment: userComment,
+          commentId: comment._id,
+        }),
+      });
+      console.log(response);
+      if (!response.ok) {
+        throw new Error(await response.text());
+      }
+
+      // Handle success - maybe redirect or show a message
+    } catch (error) {
+      console.error(
+        "There was a problem with the fetch operation:",
+        error.message
+      );
+    }
+  };
   return (
     <Card boxShadow={"lg"} borderRadius={5} pt={5} pb={5}>
-      <CardBody>
-        <VStack>
-          <HStack minW={"100%"} gap={5} pl={2} justifyContent={"space-between"}>
-            <HStack justifyContent={"flex-start"}>
-              <FontAwesomeIcon
-                icon={faUserCircle}
-                style={{ color: "#808080" }}
-                size="3x"
-              />
-              <Text fontWeight={"bold"}>{comment.username}</Text>
-            </HStack>
-            {!isEditMode ? (
-              <Box onClick={handleEditMode}>
-                <EditIcon boxSize={6} />
-              </Box>
-            ) : (
-              <HStack>
-                <Button colorScheme="green" variant="ghost" size="sm">
-                  Save
-                </Button>
-                <Button
-                  onClick={handleEditMode}
-                  size="xs"
-                  colorScheme="red"
-                  variant="outline"
-                >
-                  Cancel
-                </Button>
+      <form onSubmit={handleSubmit}>
+        <CardBody>
+          <VStack>
+            <HStack
+              minW={"100%"}
+              gap={5}
+              pl={2}
+              justifyContent={"space-between"}
+            >
+              <HStack justifyContent={"flex-start"}>
+                <FontAwesomeIcon
+                  icon={faUserCircle}
+                  style={{ color: "#808080" }}
+                  size="3x"
+                />
+                <Text fontWeight={"bold"}>{comment.username}</Text>
               </HStack>
+              {!isEditMode ? (
+                <Box onClick={handleEditMode}>
+                  <EditIcon boxSize={6} />
+                </Box>
+              ) : (
+                <HStack>
+                  <Button
+                    // onClick={handleEditMode}
+                    type="submit"
+                    colorScheme="green"
+                    variant="ghost"
+                    size="sm"
+                  >
+                    Save
+                  </Button>
+                  <Button
+                    onClick={handleEditMode}
+                    size="xs"
+                    colorScheme="red"
+                    variant="outline"
+                  >
+                    Cancel
+                  </Button>
+                </HStack>
+              )}
+            </HStack>
+            <Flex justifyContent={"flex-end"} minW={"100%"}>
+              {" "}
+              <Text fontSize={"2xs"}>{comment.time}</Text>
+            </Flex>
+            {!isEditMode ? (
+              <Text>{inputText === "" ? comment.content : inputText}</Text>
+            ) : (
+              <Input
+                type="text"
+                name="user_comment"
+                onChange={handleInputOnChange}
+                value={inputText === "" ? comment.content : inputText}
+              />
             )}
-          </HStack>
-          <Flex justifyContent={"flex-end"} minW={"100%"}>
-            {" "}
-            <Text fontSize={"2xs"}>{comment.time}</Text>
-          </Flex>
-          {!isEditMode ? (
-            <Text>{comment.content}</Text>
-          ) : (
-            <Input type="text" value={comment.content} />
-          )}
-        </VStack>
-      </CardBody>
-      <Divider orientation="horizontal" color={"gray"} />{" "}
+          </VStack>
+        </CardBody>
+        <Divider orientation="horizontal" color={"gray"} />{" "}
+      </form>
     </Card>
   );
 };
-
 export default Comment;

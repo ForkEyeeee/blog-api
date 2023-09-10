@@ -9,7 +9,6 @@ const asyncHandler = require("express-async-handler");
 
 exports.post_list_get = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    console.log("Unprotected route hit");
     const posts = await Post.find({});
     res.json({ message: posts });
   }
@@ -37,7 +36,6 @@ exports.post_get = asyncHandler(
       time: 1,
       _id: 1,
     });
-    console.log(comments);
     res.json({ post, comments });
   }
 );

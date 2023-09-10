@@ -6,7 +6,6 @@ const Comment = require("../models/comment");
 const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 exports.post_list_get = asyncHandler(async (req, res, next) => {
-    console.log("Unprotected route hit");
     const posts = await Post.find({});
     res.json({ message: posts });
 });
@@ -25,7 +24,6 @@ exports.post_get = asyncHandler(async (req, res, next) => {
         time: 1,
         _id: 1,
     });
-    console.log(comments);
     res.json({ post, comments });
 });
 exports.update_post_form_put = asyncHandler(async (req, res, next) => {

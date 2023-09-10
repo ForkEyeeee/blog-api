@@ -19,6 +19,8 @@ const CreateCommentForm = ({ postid }) => {
   const location = `http://localhost:5173/api${useLocation().pathname}`;
   const handleSubmit = async e => {
     e.preventDefault();
+    navigate(0);
+
     const formData = new FormData(e.target);
     const comment = formData.get("comment");
     console.log(comment);
@@ -44,7 +46,6 @@ const CreateCommentForm = ({ postid }) => {
         error.message
       );
     }
-    navigate(0);
   };
 
   return (
