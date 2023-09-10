@@ -74,7 +74,7 @@ exports.login_form_post = asyncHandler(async (req, res, next) => {
     let token;
     try {
         // Creating jwt token
-        token = jwt.sign({ userId: existingUser._id, username: existingUser.username }, process.env.signature, { expiresIn: "1h" });
+        token = jwt.sign({ userId: existingUser._id, username: existingUser.username }, process.env.signature, { expiresIn: "30m" });
     }
     catch (err) {
         console.log(err);

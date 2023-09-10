@@ -89,7 +89,7 @@ exports.login_form_post = asyncHandler(
       token = jwt.sign(
         { userId: existingUser._id, username: existingUser.username },
         process.env.signature,
-        { expiresIn: "1h" }
+        { expiresIn: "30m" }
       );
     } catch (err) {
       console.log(err);

@@ -1,9 +1,11 @@
+import { useState } from "react";
+import CommentProps from "../types/comment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/fontawesome-free-solid";
 import { EditIcon } from "@chakra-ui/icons";
-import { VStack } from "@chakra-ui/react";
 import {
   Text,
+  VStack,
   HStack,
   Card,
   CardBody,
@@ -13,45 +15,30 @@ import {
   Button,
   Divider,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import parseJwt from "../hooks/parseJWT";
+import validateToken from "../hooks/validateToken";
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment }: { comment: CommentProps }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [inputText, setInputText] = useState("");
-
-  const navigate = useNavigate();
   const token = localStorage.getItem("jwt");
   const location = `http://localhost:5173/api${useLocation().pathname}`;
-  // useEffect(() => {
-
-  //   data = ;
-  //   return
-  // }, [token]);
-  function parseJwt(token) {
-    if (!token) {
-      return;
-    }
-    const base64Url = token.split(".")[1];
-    const base64 = base64Url.replace("-", "+").replace("_", "/");
-    return JSON.parse(window.atob(base64));
-  }
-
-  let data = parseJwt(token);
+  const parsedToken = parseJwt(token);
+  const isExpiredUser = validateToken(parsedToken);
 
   const handleEditMode = () => {
     setIsEditMode(() => !isEditMode);
   };
+
   const handleInputOnChange = e => {
     setInputText(e.target.value);
   };
+
   const handleSubmit = async e => {
     e.preventDefault();
-    handleEditMode();
     const formData = new FormData(e.target);
     const userComment = formData.get("user_comment");
-    // console.log(userComment);
     try {
       const response = await fetch(location, {
         method: "POST",
@@ -64,7 +51,6 @@ const Comment = ({ comment }) => {
           commentId: comment._id,
         }),
       });
-      console.log(response);
       if (!response.ok) {
         throw new Error(await response.text());
       }
@@ -76,6 +62,7 @@ const Comment = ({ comment }) => {
         error.message
       );
     }
+    handleEditMode();
   };
   return (
     <Card boxShadow={"lg"} borderRadius={5} pt={5} pb={5}>
@@ -96,8 +83,9 @@ const Comment = ({ comment }) => {
                 />
                 <Text fontWeight={"bold"}>{comment.username}</Text>
               </HStack>
-              {data !== undefined ? (
-                data.username !== comment.username ? undefined : !isEditMode ? (
+              {parsedToken !== undefined && !isExpiredUser ? (
+                parsedToken.username !==
+                comment.username ? undefined : !isEditMode ? (
                   <Box onClick={handleEditMode}>
                     <EditIcon boxSize={6} />
                   </Box>
