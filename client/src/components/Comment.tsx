@@ -42,7 +42,7 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
     try {
       handleEditMode();
       const response = await fetch(location, {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -62,6 +62,7 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
       );
     }
   };
+  console.log(isExpiredUser);
   return (
     <Card boxShadow={"lg"} borderRadius={5} pt={5} pb={5}>
       <form onSubmit={handleSubmit}>
@@ -81,7 +82,7 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
                 />
                 <Text fontWeight={"bold"}>{comment.username}</Text>
               </HStack>
-              {parsedToken !== undefined && !isExpiredUser ? (
+              {parsedToken !== undefined && isExpiredUser ? (
                 parsedToken.username !==
                 comment.username ? undefined : !isEditMode ? (
                   <Box onClick={handleEditMode}>

@@ -18,7 +18,6 @@ const CreateCommentForm = ({ postid }: CreateCommentFormProps) => {
 
     const formData = new FormData(e.target);
     const comment = formData.get("comment");
-    console.log(comment);
 
     try {
       const response = await fetch(location, {

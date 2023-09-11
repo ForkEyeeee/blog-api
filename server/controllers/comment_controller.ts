@@ -14,26 +14,46 @@ exports.create_comment_form_get = asyncHandler(
   }
 );
 
-(exports.create_comment_form_post =
-  // Main middleware
-  asyncHandler(async (req, res, next) => {
-    // if (!errors.isEmpty()) {
-    //   return res.status(400).json({ errors: errors.array() });
-    // }
-    console.log("] comment");
+exports.update_comment_form_put = [
+  body("userComment", "edited comment must not be empty.")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    } else {
+      const usertoken = req.headers.authorization;
+      const token = usertoken.split(" ");
+      const decoded = jwt.verify(token[1], process.env.signature);
+      await Comment.findOneAndUpdate(
+        { _id: req.body.commentId },
+        { content: req.body.userComment }
+      );
+    }
+  }),
+];
 
-    const usertoken = req.headers.authorization;
-    const token = usertoken.split(" ");
-    const decoded = jwt.verify(token[1], process.env.signature);
-
-    if (req.body.comment) {
+exports.create_comment_form_post = [
+  body("comment", "new comment must not be empty.")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    } else {
+      const usertoken = req.headers.authorization;
+      const token = usertoken.split(" ");
+      const decoded = jwt.verify(token[1], process.env.signature);
       const newComment = new Comment({
         username: decoded.username,
         content: req.body.comment,
         post: req.params.postid,
         time: new Date().toJSON().slice(0, 10).split("-").reverse().join("/"),
       });
-
       await newComment.save();
       await Post.findOneAndUpdate(
         { _id: req.params.postid },
@@ -43,30 +63,9 @@ exports.create_comment_form_get = asyncHandler(
         { _id: decoded.userId },
         { $push: { comments: newComment } }
       );
-      // res.redirect(`/`);
-    } else if (req.body.userComment) {
-      console.log("updating comment");
-      await Comment.findOneAndUpdate(
-        { _id: req.body.commentId },
-        { content: req.body.userComment }
-      );
-      // res.redirect("/");
-    } else {
-      // Neither a new comment nor an edited comment provided.
-      res.status(400).send("Invalid request");
     }
-  })),
-  (exports.update_comment_form_get = asyncHandler(
-    async (req: Request, res: Response, next: NextFunction) => {
-      res.json({ message: "GET Update a Comment" });
-    }
-  ));
-
-exports.update_comment_form_put = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    res.json({ message: "PUT Update a Comment" });
-  }
-);
+  }),
+];
 
 exports.delete_comment_form_get = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {

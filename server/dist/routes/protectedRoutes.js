@@ -14,6 +14,8 @@ router.post("/users/new", auth_controller.sign_up_form_post);
 router.get("/Aboutus", post_controller.about_us_get);
 // router.get("/logout", auth_controller.logout_get);
 router.get("/verifytoken", auth_controller.verify_token);
+router.post("/posts/:postid", comment_controller.create_comment_form_post);
+router.put("/posts/:postid", comment_controller.update_comment_form_put);
 //Post routes
 // router.post("/posts", post_controller.create_post_form_post);
 // router.put("/posts/:postid", post_controller.update_post_form_put);
