@@ -73,14 +73,16 @@ exports.login_form_post = asyncHandler(
     }
 
     if (!existingUser) {
-      const error = new Error("Wrong details please check at once");
+      const error = new Error("Wrong username");
+      // throw new Error("Passwords do not match");
       return next(error);
     }
 
     // Compare the password using bcrypt
     const isMatch = await bcrypt.compare(password, existingUser.password);
     if (!isMatch) {
-      const error = new Error("Wrong details please check at once");
+      const error = new Error("Wrong password");
+      // res.json({ Message: "Passwords do not match" });
       console.log(error);
       // res.json({ Message: error });
       return next(error);
@@ -99,7 +101,7 @@ exports.login_form_post = asyncHandler(
       const error = new Error("Error! Something went wrong.");
       return next(error);
     }
-
+    console.log("testing");
     res.status(200).json({
       success: true,
       data: {

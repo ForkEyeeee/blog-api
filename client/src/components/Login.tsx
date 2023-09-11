@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@chakra-ui/react";
-import { FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
+import { FormControl, FormLabel, Input, Button, Text } from "@chakra-ui/react";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [formError, setFormError] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async e => {
@@ -18,15 +19,14 @@ const Login = () => {
       body: JSON.stringify({ username, password }),
     });
 
-    const { data } = await response.json();
-    console.log(data);
-    if (data !== undefined) {
+    const data = await response.json();
+
+    if (data.success) {
       localStorage.setItem("jwt", data.token);
       navigate("/");
     } else {
-      // Handle login failure, maybe set an error state and display it
+      setFormError(data.message);
       console.error("Login failed");
-      navigate("/error");
     }
   };
 
@@ -50,6 +50,7 @@ const Login = () => {
             type="password"
           />
         </FormControl>
+        <Text color={"red"}>{formError && formError}</Text>
         <Button type="submit">Submit</Button>
       </form>
     </Box>
