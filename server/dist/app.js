@@ -24,11 +24,6 @@ const limiter = RateLimit({
     windowMs: 1 * 60 * 1000,
     max: 2000,
 });
-// const auth = jwt({
-//   secret: process.env.signature,
-//   userProperty: "payload",
-//   algorithms: ["HS256"],
-// });
 app.use(cors());
 app.use(limiter);
 app.use(logger("dev"));

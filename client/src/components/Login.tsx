@@ -20,14 +20,13 @@ const Login = () => {
 
     const { data } = await response.json();
     console.log(data);
-    if (data.token) {
+    if (data !== undefined) {
       localStorage.setItem("jwt", data.token);
       navigate("/");
-
-      // Handle redirect or other actions after a successful login
     } else {
       // Handle login failure, maybe set an error state and display it
-      console.error("Login failed:", data.message);
+      console.error("Login failed");
+      navigate("/error");
     }
   };
 

@@ -6,7 +6,9 @@ const bcrypt = require("bcryptjs");
 const { body, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 const asyncHandler = require("express-async-handler");
-exports.verify_token = asyncHandler(async (req, res, next) => { });
+exports.error_page_get = asyncHandler(async (req, res, next) => {
+    res.json({ message: "Incorrect Username or Password" });
+});
 exports.sign_up_form_post = [
     body("username", "email must not be empty.")
         .trim()
@@ -68,6 +70,8 @@ exports.login_form_post = asyncHandler(async (req, res, next) => {
     const isMatch = await bcrypt.compare(password, existingUser.password);
     if (!isMatch) {
         const error = new Error("Wrong details please check at once");
+        console.log(error);
+        // res.json({ Message: error });
         return next(error);
     }
     let token;

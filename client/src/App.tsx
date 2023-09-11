@@ -5,6 +5,7 @@ import NavBar from "./components/NavBar";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import Aboutus from "./components/AboutUs";
+import ErrorPage from "./components/ErrorPage";
 function App() {
   return (
     <>
@@ -15,6 +16,7 @@ function App() {
         <Route path="/users/new" element={<SignUp />} />
         <Route path="/session/new" element={<Login />} />
         <Route path="/Aboutus" element={<Aboutus />} />
+        <Route path="/error" element={<ErrorPage />} />
       </Routes>
     </>
   );

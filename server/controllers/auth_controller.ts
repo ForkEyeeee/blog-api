@@ -7,8 +7,10 @@ const jwt = require("jsonwebtoken");
 
 const asyncHandler = require("express-async-handler");
 
-exports.verify_token = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {}
+exports.error_page_get = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    res.json({ message: "Incorrect Username or Password" });
+  }
 );
 
 exports.sign_up_form_post = [
@@ -79,6 +81,8 @@ exports.login_form_post = asyncHandler(
     const isMatch = await bcrypt.compare(password, existingUser.password);
     if (!isMatch) {
       const error = new Error("Wrong details please check at once");
+      console.log(error);
+      // res.json({ Message: error });
       return next(error);
     }
 
