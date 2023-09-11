@@ -1,23 +1,15 @@
-import { useEffect, useState } from "react";
-import { useLocation, useNavigate, useNavigation } from "react-router-dom";
-import { Box, Stack, Text, HStack, VStack, Flex } from "@chakra-ui/react";
-import useDataFetching from "../hooks/fetch";
-import Comment from "./Comment";
-import {
-  FormControl,
-  FormLabel,
-  Input,
-  FormErrorMessage,
-  Button,
-  FormHelperText,
-} from "@chakra-ui/react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Box } from "@chakra-ui/react";
+import { FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
+
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
   const handleSubmit = async e => {
     e.preventDefault();
-
     const response = await fetch("/api/session/new", {
       method: "POST",
       headers: {

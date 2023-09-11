@@ -1,11 +1,10 @@
-import { Box, HStack, Badge, Text, Image, Flex } from "@chakra-ui/react";
-import { FaHome, FaShoppingCart } from "react-icons/fa";
+import { Box, HStack } from "@chakra-ui/react";
 import { Link as ReactRouterLink } from "react-router-dom";
-import { Link as ChakraLink, LinkProps } from "@chakra-ui/react";
+import { Link as ChakraLink } from "@chakra-ui/react";
+
 const NavBar = () => {
   return (
     <Box
-      // bgGradient="linear(to-r, blue.400, blue.600)"
       pb={10}
       bg="gray"
       fontFamily={"inter"}

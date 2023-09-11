@@ -2,7 +2,6 @@ require("dotenv").config();
 import { Request, Response, NextFunction } from "express";
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
-const passport = require("passport");
 const { body, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 

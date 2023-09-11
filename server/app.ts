@@ -44,7 +44,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(compression());
 
 function verifyToken(req: Request, res: Response, next: NextFunction) {
-  console.log(req.headers.authorization);
   const authHeader = req.headers.authorization;
   if (!authHeader) {
     return res

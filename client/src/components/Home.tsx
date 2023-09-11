@@ -1,40 +1,39 @@
 import { useEffect, useState } from "react";
-import { Box, Heading } from "@chakra-ui/react";
-import CardItem from "./cardItem";
+import { Box } from "@chakra-ui/react";
+import CardItem from "./CardItem";
+import PostProps from "../types/postProps";
+
 const Home = () => {
-  const [message, setMessage] = useState([]);
+  const [post, setPost] = useState<Array<PostProps>>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch("http://localhost:5173/api/posts");
-        // console.log(response);
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
-
         const text = await response.text();
-        // console.log(text);
         const data = JSON.parse(text);
-        setMessage(data.message);
+        setPost(data.message);
       } catch (error) {
         console.error(error);
       }
     };
     fetchData();
   }, []);
-  console.log(message);
+
   return (
     <Box>
-      {message.map(message => (
+      {post.map(postItem => (
         <CardItem
-          key={message._id}
-          url={message._id}
-          title={message.title}
-          comments={message.comments}
-          time={message.time}
-          content={message.content}
-          published={message.published}
+          key={postItem._id}
+          url={postItem._id}
+          title={postItem.title}
+          comments={postItem.comments}
+          time={postItem.time}
+          content={postItem.content}
+          published={postItem.published}
         />
       ))}
     </Box>

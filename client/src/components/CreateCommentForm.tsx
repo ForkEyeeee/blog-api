@@ -1,19 +1,14 @@
+import CreateCommentFormProps from "../types/createCommentFormProps";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Box,
-  Flex,
-  VStack,
-  HStack,
-  Text,
-  Heading,
   Textarea,
   Divider,
   AbsoluteCenter,
   Button,
 } from "@chakra-ui/react";
-import useDataFetching from "../hooks/useDataFetching";
-import { useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-const CreateCommentForm = ({ postid }) => {
+
+const CreateCommentForm = ({ postid }: CreateCommentFormProps) => {
   const navigate = useNavigate();
   const token = localStorage.getItem("jwt");
   const location = `http://localhost:5173/api${useLocation().pathname}`;

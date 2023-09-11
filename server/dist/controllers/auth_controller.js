@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("dotenv").config();
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
-const passport = require("passport");
 const { body, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 const asyncHandler = require("express-async-handler");

@@ -1,7 +1,10 @@
 import { useState } from "react";
-import CommentProps from "../types/comment";
+import CommentProps from "../types/commentProps";
+import { useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/fontawesome-free-solid";
+import parseJwt from "../hooks/parseJWT";
+import validateToken from "../hooks/validateToken";
 import { EditIcon } from "@chakra-ui/icons";
 import {
   Text,
@@ -15,9 +18,6 @@ import {
   Button,
   Divider,
 } from "@chakra-ui/react";
-import { useLocation } from "react-router-dom";
-import parseJwt from "../hooks/parseJWT";
-import validateToken from "../hooks/validateToken";
 
 const Comment = ({ comment }: { comment: CommentProps }) => {
   const [isEditMode, setIsEditMode] = useState(false);

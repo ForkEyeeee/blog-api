@@ -38,7 +38,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(compression());
 function verifyToken(req, res, next) {
-    console.log(req.headers.authorization);
     const authHeader = req.headers.authorization;
     if (!authHeader) {
         return res

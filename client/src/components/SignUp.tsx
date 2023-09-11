@@ -1,27 +1,9 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { Box, Stack, Text, HStack, VStack, Flex } from "@chakra-ui/react";
-import useDataFetching from "../hooks/useDataFetching";
-import Comment from "./Comment";
-import {
-  FormControl,
-  FormLabel,
-  Input,
-  FormErrorMessage,
-  Button,
-  FormHelperText,
-} from "@chakra-ui/react";
-const SignUp = () => {
-  const location = `http://localhost:5173/api${useLocation().pathname}`;
-  const [data, loading, error] = useDataFetching(location);
+import { Box } from "@chakra-ui/react";
+import { FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
 
+const SignUp = () => {
   return (
     <Box>
-      {/* {data && (
-        <>
-          <Text>{data.message}</Text>
-        </>
-      )} */}
       <form method="POST" action="/api/users/new">
         <FormControl>
           <FormLabel>Username</FormLabel>
