@@ -40,6 +40,7 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
     const formData = new FormData(e.target);
     const userComment = formData.get("user_comment");
     try {
+      handleEditMode();
       const response = await fetch(location, {
         method: "POST",
         headers: {
@@ -54,15 +55,12 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
       if (!response.ok) {
         throw new Error(await response.text());
       }
-
-      // Handle success - maybe redirect or show a message
     } catch (error) {
       console.error(
         "There was a problem with the fetch operation:",
         error.message
       );
     }
-    handleEditMode();
   };
   return (
     <Card boxShadow={"lg"} borderRadius={5} pt={5} pb={5}>
@@ -92,7 +90,6 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
                 ) : (
                   <HStack>
                     <Button
-                      // onClick={handleEditMode}
                       type="submit"
                       colorScheme="green"
                       variant="ghost"
