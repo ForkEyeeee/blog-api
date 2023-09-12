@@ -22,21 +22,20 @@ import {
 const Comment = ({ comment }: { comment: CommentProps }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [inputText, setInputText] = useState("");
-  const [visible, setVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(true);
+  const refContainer = useRef(null);
 
   const token = localStorage.getItem("jwt");
   const location = `http://localhost:5173/api${useLocation().pathname}`;
   const parsedToken = parseJwt(token);
   const isExpiredUser = validateToken(parsedToken);
-  const refContainer = useRef(null);
-  console.log(refContainer.current);
 
   const handleEditMode = () => {
-    setIsEditMode(() => !isEditMode);
+    setIsEditMode(prevIsEdit => !prevIsEdit);
   };
 
   const handleVisibleMode = () => {
-    setVisible(prev => !prev);
+    setIsVisible(false);
   };
 
   const handleInputOnChange = e => {
@@ -45,12 +44,9 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    handleVisibleMode();
-
     const formData = new FormData(e.target);
     const userComment = formData.get("user_comment");
     try {
-      handleEditMode();
       const response = await fetch(location, {
         method: "PUT",
         headers: {
@@ -64,23 +60,19 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
       });
       if (!response.ok) {
         throw new Error(await response.text());
+      } else {
+        handleEditMode();
       }
     } catch (error) {
-      console.error(
-        "There was a problem with the fetch operation:",
-        error.message
-      );
+      console.error(error);
     }
   };
 
   const handleDelete = async e => {
     e.preventDefault();
-    console.log("delete pressed");
     const formData = new FormData(refContainer.current);
     const userComment = formData.get("user_comment");
-    console.log(userComment);
     try {
-      handleEditMode();
       const response = await fetch(location, {
         method: "DELETE",
         headers: {
@@ -94,15 +86,18 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
       });
       if (!response.ok) {
         throw new Error(await response.text());
+      } else {
+        handleEditMode();
+        handleVisibleMode();
       }
     } catch (error) {
-      console.error(error.message);
+      console.error(error);
     }
   };
 
   return (
     <>
-      {visible && (
+      {isVisible && (
         <Card boxShadow={"lg"} borderRadius={5} pt={5} pb={5}>
           <form onSubmit={handleSubmit} ref={refContainer}>
             <CardBody>

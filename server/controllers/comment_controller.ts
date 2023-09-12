@@ -1,6 +1,4 @@
 require("dotenv").config();
-
-import { populate } from "dotenv";
 import { Request, Response, NextFunction } from "express";
 const Comment = require("../models/comment");
 const { body, validationResult } = require("express-validator");
@@ -27,11 +25,12 @@ exports.update_comment_form_put = [
     } else {
       const usertoken = req.headers.authorization;
       const token = usertoken.split(" ");
-      const decoded = jwt.verify(token[1], process.env.signature);
+      jwt.verify(token[1], process.env.signature);
       await Comment.findOneAndUpdate(
         { _id: req.body.commentId },
         { content: req.body.userComment }
       );
+      res.json({ Message: "Comment updated" });
     }
   }),
 ];
@@ -72,7 +71,7 @@ exports.delete_comment_form_delete = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     let { usercomment, commentId } = req.body;
     await Comment.deleteOne({ _id: commentId });
-    res.json({ message: "DELETED" });
+    res.json({ message: "Comment deleted" });
   }
 );
 

@@ -6,7 +6,7 @@ import CreateCommentForm from "./CreateCommentForm";
 
 const Post = () => {
   const location = `http://localhost:5173/api${useLocation().pathname}`;
-  const [data, loading, error] = useDataFetching(location, undefined);
+  const [data, loading, error] = useDataFetching(location);
 
   return (
     <Box>

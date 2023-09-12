@@ -20,11 +20,8 @@ const CreateCommentForm = ({ postid }: CreateCommentFormProps) => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    navigate(0);
-
     const formData = new FormData(e.target);
     const comment = formData.get("comment");
-
     try {
       const response = await fetch(location, {
         method: "POST",
@@ -37,14 +34,14 @@ const CreateCommentForm = ({ postid }: CreateCommentFormProps) => {
 
       if (!response.ok) {
         throw new Error(await response.text());
+      } else {
+        navigate(0);
       }
-
-      // Handle success - maybe redirect or show a message
     } catch (error) {
       console.error(error);
     }
   };
-  console.log(data);
+
   return (
     <>
       {data && isExpiredUser && (

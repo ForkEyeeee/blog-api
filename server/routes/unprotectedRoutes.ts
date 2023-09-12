@@ -5,9 +5,9 @@ const post_controller = require("../controllers/post_controller");
 const comment_controller = require("../controllers/comment_controller");
 const auth_controller = require("../controllers/auth_controller");
 /* GET home page. */
-// router.get("/", (req, res) => {
-//   res.redirect("/posts");
-// });
+router.get("/", (req: Request, res: Response, next: NextFunction) => {
+  res.redirect("posts");
+});
 //Index routes
 // router.get("/session/new", index_controller.login_form_get);
 // router.get("/membership", index_controller.membership_form_get);

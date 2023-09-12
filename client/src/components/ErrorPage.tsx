@@ -6,7 +6,7 @@ const ErrorPage = () => {
   // const token = localStorage.getItem("jwt");
   const location = `http://localhost:5173/api${useLocation().pathname}`;
   const [data, loading, error] = useDataFetching(location);
-  console.log(data);
+
   return (
     <Box>
       {data && (

@@ -52,7 +52,6 @@ exports.sign_up_form_post = [
 
     try {
       await newUser.save();
-
       res.status(201).json({
         success: true,
         data: {
@@ -82,7 +81,6 @@ exports.login_form_post = asyncHandler(
 
     if (!existingUser) {
       const error = new Error("Wrong username");
-      // throw new Error("Passwords do not match");
       return next(error);
     }
 
@@ -90,9 +88,7 @@ exports.login_form_post = asyncHandler(
     const isMatch = await bcrypt.compare(password, existingUser.password);
     if (!isMatch) {
       const error = new Error("Wrong password");
-      // res.json({ Message: "Passwords do not match" });
       console.log(error);
-      // res.json({ Message: error });
       return next(error);
     }
 

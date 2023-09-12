@@ -3,10 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("dotenv").config();
 const Post = require("../models/post");
 const Comment = require("../models/comment");
-const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 exports.post_list_get = asyncHandler(async (req, res, next) => {
     const posts = await Post.find({});
+    console.log("getposds");
     res.json({ message: posts });
 });
 exports.delete_post_form_get = asyncHandler(async (req, res, next) => {
