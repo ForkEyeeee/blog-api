@@ -16,6 +16,7 @@ const auth_controller = require("../controllers/auth_controller");
 // router.post("/users/new", auth_controller.sign_up_form_post);
 // router.post("/session/new", auth_controller.login_form_post);
 router.get("/posts/:postid", post_controller.post_get);
+router.post("/users/new", auth_controller.sign_up_form_post);
 
 // // router.get("/logout", auth_controller.logout_get);
 
@@ -28,6 +29,7 @@ router.get("/posts/:postid", post_controller.post_get);
 router.get("/posts", post_controller.post_list_get);
 router.post("/session/new", auth_controller.login_form_post);
 router.get("/error", auth_controller.error_page_get);
+
 // //Comment routes
 // router.get("/comments", comment_controller.comment_list_get);
 // router.post("/comments", comment_controller.create_comment_form_post);

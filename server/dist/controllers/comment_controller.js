@@ -54,11 +54,10 @@ exports.create_comment_form_post = [
         }
     }),
 ];
-exports.delete_comment_form_get = asyncHandler(async (req, res, next) => {
-    res.json({ message: "GET Delete a Comment" });
-});
 exports.delete_comment_form_delete = asyncHandler(async (req, res, next) => {
-    res.json({ message: "DELETE a Comment" });
+    let { usercomment, commentId } = req.body;
+    await Comment.deleteOne({ _id: commentId });
+    res.json({ message: "DELETED" });
 });
 exports.comment_list_get = asyncHandler(async (req, res, next) => {
     res.json({ message: "GET Comment List" });

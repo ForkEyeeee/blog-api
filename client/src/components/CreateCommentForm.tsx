@@ -7,11 +7,17 @@ import {
   AbsoluteCenter,
   Button,
 } from "@chakra-ui/react";
+import parseJwt from "../hooks/parseJWT";
+import validateToken from "../hooks/validateToken";
 
 const CreateCommentForm = ({ postid }: CreateCommentFormProps) => {
   const navigate = useNavigate();
   const token = localStorage.getItem("jwt");
   const location = `http://localhost:5173/api${useLocation().pathname}`;
+  const data = parseJwt(token);
+  const parsedToken = parseJwt(token);
+  const isExpiredUser = validateToken(parsedToken);
+
   const handleSubmit = async e => {
     e.preventDefault();
     navigate(0);
@@ -35,25 +41,13 @@ const CreateCommentForm = ({ postid }: CreateCommentFormProps) => {
 
       // Handle success - maybe redirect or show a message
     } catch (error) {
-      console.error(
-        "There was a problem with the fetch operation:",
-        error.message
-      );
+      console.error(error);
     }
   };
-  function parseJwt(token) {
-    if (!token) {
-      return;
-    }
-    const base64Url = token.split(".")[1];
-    const base64 = base64Url.replace("-", "+").replace("_", "/");
-    return JSON.parse(window.atob(base64));
-  }
-
-  let data = parseJwt(token);
+  console.log(data);
   return (
     <>
-      {data && (
+      {data && isExpiredUser && (
         <Box>
           <Box position="relative" padding="10">
             <Divider />

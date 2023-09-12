@@ -19,14 +19,13 @@ const Login = () => {
       body: JSON.stringify({ username, password }),
     });
 
-    const data = await response.json();
+    const { data, success, message } = await response.json();
 
-    if (data.success) {
+    if (success) {
       localStorage.setItem("jwt", data.token);
       navigate("/");
     } else {
-      setFormError(data.message);
-      console.error("Login failed");
+      setFormError(message);
     }
   };
 

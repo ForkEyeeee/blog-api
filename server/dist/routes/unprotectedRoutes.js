@@ -17,6 +17,7 @@ const auth_controller = require("../controllers/auth_controller");
 // router.post("/users/new", auth_controller.sign_up_form_post);
 // router.post("/session/new", auth_controller.login_form_post);
 router.get("/posts/:postid", post_controller.post_get);
+router.post("/users/new", auth_controller.sign_up_form_post);
 // // router.get("/logout", auth_controller.logout_get);
 // //Post routes
 // // router.post("/posts", post_controller.create_post_form_post);

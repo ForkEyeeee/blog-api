@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+import { populate } from "dotenv";
 import { Request, Response, NextFunction } from "express";
 const Comment = require("../models/comment");
 const { body, validationResult } = require("express-validator");
@@ -67,15 +68,11 @@ exports.create_comment_form_post = [
   }),
 ];
 
-exports.delete_comment_form_get = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    res.json({ message: "GET Delete a Comment" });
-  }
-);
-
 exports.delete_comment_form_delete = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    res.json({ message: "DELETE a Comment" });
+    let { usercomment, commentId } = req.body;
+    await Comment.deleteOne({ _id: commentId });
+    res.json({ message: "DELETED" });
   }
 );
 

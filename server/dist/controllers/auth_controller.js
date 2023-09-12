@@ -19,7 +19,9 @@ exports.sign_up_form_post = [
         .isLength({ min: 1 })
         .escape(),
     body("confirmpassword").custom((value, { req }) => {
-        if (value !== req.body.password) {
+        if (value !== req.body.confirmpassword) {
+            console.log(value);
+            console.log(req.body);
             throw new Error("Passwords do not match");
         }
         return true;
@@ -27,7 +29,11 @@ exports.sign_up_form_post = [
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
+            const err = new Error(errors
+                .array()
+                .map(el => el["msg"])
+                .toString());
+            return next(err);
         }
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         const newUser = new User({
@@ -80,6 +86,7 @@ exports.login_form_post = asyncHandler(async (req, res, next) => {
     try {
         // Creating jwt token
         token = jwt.sign({ userId: existingUser._id, username: existingUser.username }, process.env.signature, { expiresIn: "30m" });
+        console.log(token);
     }
     catch (err) {
         console.log(err);
