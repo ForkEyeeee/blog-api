@@ -8,7 +8,6 @@ const asyncHandler = require("express-async-handler");
 exports.post_list_get = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const posts = await Post.find({});
-    console.log("getposds");
     res.json({ message: posts });
   }
 );

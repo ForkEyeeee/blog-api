@@ -99,13 +99,11 @@ exports.login_form_post = asyncHandler(async (req, res, next) => {
         },
     });
 });
-// exports.logout_get = asyncHandler(
-//   async (req: Request, res: Response, next: NextFunction) => {
-//     req.logout(function (err: string) {
-//       if (err) {
-//         return next(err);
-//       }
-//       res.redirect("/home");
-//     });
-//   }
-// );
+exports.logout_get = asyncHandler(async (req, res, next) => {
+    req.logout(function (err) {
+        if (err) {
+            return next(err);
+        }
+        res.redirect("/home");
+    });
+});
