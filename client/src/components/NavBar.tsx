@@ -4,7 +4,7 @@ import { Link as ChakraLink } from "@chakra-ui/react";
 import parseJwt from "../hooks/parseJWT";
 import validateToken from "../hooks/validateToken";
 import { useLocation, useNavigate } from "react-router-dom";
-import destroyToken from "../hooks/destroyToken";
+import { useEffect } from "react";
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -12,12 +12,13 @@ const NavBar = () => {
   const location = `http://localhost:5173/api${useLocation().pathname}`;
   const parsedToken = parseJwt(token);
   const isExpiredUser = validateToken(parsedToken);
-  console.log(parsedToken && !isExpiredUser);
 
-  const destroyToken = () => {
-    localStorage.removeItem("jwt");
-    navigate("/");
-  };
+  useEffect(() => {
+    if (!isExpiredUser && parsedToken) {
+      localStorage.removeItem("jwt");
+      navigate("/");
+    }
+  }, [isExpiredUser, navigate, parsedToken]);
 
   return (
     <Box>
@@ -48,7 +49,14 @@ const NavBar = () => {
                 </ChakraLink>
               </>
             ) : (
-              <Box onClick={destroyToken}>Logout</Box>
+              <Box
+                onClick={() => {
+                  localStorage.removeItem("jwt");
+                  navigate("/");
+                }}
+              >
+                Logout
+              </Box>
             )}
           </HStack>
         </Box>

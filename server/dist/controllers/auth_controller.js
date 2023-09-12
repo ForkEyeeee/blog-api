@@ -90,7 +90,6 @@ exports.login_form_post = asyncHandler(async (req, res, next) => {
         const error = new Error("Error! Something went wrong.");
         return next(error);
     }
-    console.log("testing");
     res.status(200).json({
         success: true,
         data: {
@@ -99,11 +98,13 @@ exports.login_form_post = asyncHandler(async (req, res, next) => {
         },
     });
 });
-exports.logout_get = asyncHandler(async (req, res, next) => {
-    req.logout(function (err) {
-        if (err) {
-            return next(err);
-        }
-        res.redirect("/home");
-    });
-});
+// exports.logout_get = asyncHandler(
+//   async (req: Request, res: Response, next: NextFunction) => {
+//     req.logout(function (err: string) {
+//       if (err) {
+//         return next(err);
+//       }
+//       res.redirect("/home");
+//     });
+//   }
+// );
