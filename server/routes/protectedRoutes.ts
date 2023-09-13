@@ -9,7 +9,6 @@ const auth_controller = require("../controllers/auth_controller");
 // router.get("/membership", index_controller.membership_form_get);
 // router.post("/membership", index_controller.membership_form_post);
 //Auth routes
-router.get("/Aboutus", post_controller.about_us_get);
 // router.get("/logout", auth_controller.logout_get);
 
 // router.get("/verifytoken", auth_controller.verify_token);

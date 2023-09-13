@@ -88,7 +88,6 @@ exports.login_form_post = asyncHandler(
     const isMatch = await bcrypt.compare(password, existingUser.password);
     if (!isMatch) {
       const error = new Error("Wrong password");
-      console.log(error);
       return next(error);
     }
 

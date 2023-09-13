@@ -1,5 +1,13 @@
 import { useLocation } from "react-router-dom";
-import { Box, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Flex,
+  Heading,
+  Center,
+  HStack,
+  Spinner,
+} from "@chakra-ui/react";
 import useDataFetching from "../hooks/useDataFetching";
 import Comment from "./Comment";
 import CreateCommentForm from "./CreateCommentForm";
@@ -8,14 +16,34 @@ const Post = () => {
   const location = `http://localhost:5173/api${useLocation().pathname}`;
   const [data, loading, error] = useDataFetching(location);
 
+  if (loading)
+    return (
+      <Center p={10}>
+        <HStack spacing={5}>
+          <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="blue.500"
+            size="xl"
+          />
+          <Text>Loading...</Text>
+        </HStack>
+      </Center>
+    );
+
   return (
     <Box>
       {data && (
         <>
-          <Text fontSize="3xl" fontWeight={"bold"}>
-            {data.post.title}
+          <Box>
+            <Text fontSize="3xl" fontWeight={"bold"} p={5} textAlign={"center"}>
+              {data.post.title}
+            </Text>
+          </Box>
+          <Text pl={5} pr={5} pb={5}>
+            {data.post.content}
           </Text>
-          <Text>{data.post.content}</Text>
           {data.comments.map(comment => (
             <Comment key={comment._id} comment={comment} />
           ))}

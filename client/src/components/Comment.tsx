@@ -3,6 +3,8 @@ import CommentProps from "../types/commentProps";
 import { useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/fontawesome-free-solid";
+import { RiDeleteBin5Line } from "react-icons/ri";
+import { FcCancel } from "react-icons/fc";
 import parseJwt from "../hooks/parseJWT";
 import validateToken from "../hooks/validateToken";
 import { EditIcon } from "@chakra-ui/icons";
@@ -17,6 +19,9 @@ import {
   Input,
   Button,
   Divider,
+  useToast,
+  Spinner,
+  Center,
 } from "@chakra-ui/react";
 
 const Comment = ({ comment }: { comment: CommentProps }) => {
@@ -24,6 +29,7 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
   const [inputText, setInputText] = useState("");
   const [isVisible, setIsVisible] = useState(true);
   const refContainer = useRef(null);
+  const toast = useToast();
 
   const token = localStorage.getItem("jwt");
   const location = `http://localhost:5173/api${useLocation().pathname}`;
@@ -66,6 +72,17 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const handleSave = () => {
+    toast({
+      title: "Saved.",
+      description: "Comment successfully saved.",
+      status: "success",
+      duration: 2500,
+      isClosable: true,
+      position: "bottom",
+    });
   };
 
   const handleDelete = async e => {
@@ -124,29 +141,26 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
                       </Box>
                     ) : (
                       <HStack>
-                        <Button
+                        <RiDeleteBin5Line
                           onClick={handleDelete}
                           size="xs"
                           colorScheme="red"
                           variant="outline"
-                        >
-                          Delete
-                        </Button>
+                        />
+                        <FcCancel
+                          onClick={handleEditMode}
+                          size="xs"
+                          colorScheme="red"
+                          variant="outline"
+                        />
                         <Button
                           type="submit"
                           colorScheme="green"
                           variant="ghost"
                           size="sm"
+                          onClick={handleSave}
                         >
                           Save
-                        </Button>
-                        <Button
-                          onClick={handleEditMode}
-                          size="xs"
-                          colorScheme="red"
-                          variant="outline"
-                        >
-                          Cancel
                         </Button>
                       </HStack>
                     )

@@ -64,6 +64,7 @@ exports.create_comment_form_post = [
         { $push: { comments: newComment } }
       );
     }
+    res.json({ Message: "Comment Added" });
   }),
 ];
 

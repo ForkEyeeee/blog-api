@@ -1,7 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@chakra-ui/react";
-import { FormControl, FormLabel, Input, Button, Text } from "@chakra-ui/react";
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  Button,
+  Text,
+  VStack,
+  Flex,
+} from "@chakra-ui/react";
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
@@ -33,36 +41,65 @@ const SignUp = () => {
   return (
     <Box>
       <form onSubmit={handleSubmit}>
-        <FormControl>
+        <FormControl
+          display={"flex"}
+          flexDir={"column"}
+          alignItems={"center"}
+          pt={5}
+        >
           <FormLabel>Username</FormLabel>
           <Input
             value={username}
             onChange={e => setUsername(e.target.value)}
             name="username"
-            type="text"
+            type="email"
             placeholder="Enter in email format"
+            maxW={"85%"}
           />
         </FormControl>
-        <FormControl>
+
+        <FormControl
+          display={"flex"}
+          flexDir={"column"}
+          alignItems={"center"}
+          pt={10}
+          pb={5}
+        >
+          {" "}
           <FormLabel>Password</FormLabel>
           <Input
             name="password"
             value={password}
             onChange={e => setPassword(e.target.value)}
             type="password"
+            placeholder="Choose a password"
+            maxW={"85%"}
           />
         </FormControl>
-        <FormControl>
+        <FormControl
+          display={"flex"}
+          flexDir={"column"}
+          alignItems={"center"}
+          pt={10}
+          pb={5}
+        >
+          {" "}
           <FormLabel>Confirm Password</FormLabel>
           <Input
             name="confirmpassword"
             value={confirmPassword}
             onChange={e => setConfirmPassword(e.target.value)}
             type="password"
+            placeholder="Confirm your password"
+            maxW={"85%"}
           />
         </FormControl>
         <Text color="red">{formError && formError}</Text>
-        <Button type="submit">Submit</Button>
+        <Flex justifyContent={"center"}>
+          <Button colorScheme="teal" variant="ghost" type="submit">
+            Create Account
+          </Button>
+        </Flex>
       </form>
     </Box>
   );

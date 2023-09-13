@@ -1,5 +1,6 @@
 import { Link as ReactRouterLink } from "react-router-dom";
-import { Link as ChakraLink } from "@chakra-ui/react";
+import { AbsoluteCenter, Center, Link as ChakraLink } from "@chakra-ui/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CardItemProps from "../types/cardItemProps";
 import {
   Card,
@@ -10,31 +11,37 @@ import {
   Text,
   Box,
   Stack,
+  VStack,
   Divider,
+  Flex,
 } from "@chakra-ui/react";
 
 const CardItem = ({ url, title, content, time }: CardItemProps) => {
   return (
-    <Card>
-      <CardFooter flexDir={"column"}>
-        <CardHeader pb={0}>
-          <Heading size="md">{title}</Heading>
-        </CardHeader>
-        <CardBody>
-          <Stack spacing="4">
-            <Box>
+    <>
+      <Card>
+        <ChakraLink as={ReactRouterLink} to={`/posts/${url}`}>
+          <CardHeader pb={0}>
+            <VStack align="start">
+              <Heading size="md" color="rgb(94, 192, 241)">
+                {title}
+              </Heading>
               <Text fontSize={"2xs"}>{time}</Text>
-            </Box>
-            <Box>
-              <ChakraLink as={ReactRouterLink} to={`/posts/${url}`}>
-                {content}
-              </ChakraLink>
-              <Divider />
-            </Box>
-          </Stack>
-        </CardBody>
-      </CardFooter>
-    </Card>
+            </VStack>
+          </CardHeader>
+          <CardBody>
+            <Stack spacing="4">
+              <Box>{content}</Box>
+            </Stack>
+
+            <Flex justifyContent={"center"}>
+              <Divider pt={10} width={"50%"} />
+            </Flex>
+          </CardBody>
+        </ChakraLink>
+        <CardFooter flexDir={"column"}></CardFooter>
+      </Card>
+    </>
   );
 };
 

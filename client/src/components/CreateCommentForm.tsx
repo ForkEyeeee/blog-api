@@ -6,6 +6,7 @@ import {
   Divider,
   AbsoluteCenter,
   Button,
+  Flex,
 } from "@chakra-ui/react";
 import parseJwt from "../hooks/parseJWT";
 import validateToken from "../hooks/validateToken";
@@ -48,16 +49,23 @@ const CreateCommentForm = ({ postid }: CreateCommentFormProps) => {
         <Box>
           <Box position="relative" padding="10">
             <Divider />
-            <AbsoluteCenter bg="white" px="4">
+            <AbsoluteCenter bg="white" px="4" fontWeight={"medium"}>
               Add Comment
             </AbsoluteCenter>
           </Box>
           <form onSubmit={handleSubmit}>
-            <Textarea
-              name="comment"
-              placeholder="Here is a sample placeholder"
-            />
-            <Button type="submit">Add</Button>
+            <Textarea name="comment" placeholder="Enter a new comment" />
+            <Flex justifyContent="center">
+              <Button
+                colorScheme="teal"
+                variant="ghost"
+                mt={5}
+                mb={5}
+                type="submit"
+              >
+                Submit
+              </Button>{" "}
+            </Flex>
           </form>
         </Box>
       )}

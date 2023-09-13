@@ -53,6 +53,7 @@ exports.create_comment_form_post = [
             await Post.findOneAndUpdate({ _id: req.params.postid }, { $push: { comments: newComment } });
             await User.findOneAndUpdate({ _id: decoded.userId }, { $push: { comments: newComment } });
         }
+        res.json({ Message: "Comment Added" });
     }),
 ];
 exports.delete_comment_form_delete = asyncHandler(async (req, res, next) => {
