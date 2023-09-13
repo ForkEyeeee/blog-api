@@ -22,7 +22,7 @@ const CardItem = ({ url, title, content, time }: CardItemProps) => {
       <Card>
         <ChakraLink as={ReactRouterLink} to={`/posts/${url}`}>
           <CardHeader pb={0}>
-            <VStack align="start">
+            <VStack align={{ base: "start", md: "center" }}>
               <Heading size="md" color="rgb(94, 192, 241)">
                 {title}
               </Heading>

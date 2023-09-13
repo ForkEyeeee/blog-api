@@ -143,21 +143,20 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
                       <HStack>
                         <RiDeleteBin5Line
                           onClick={handleDelete}
-                          size="xs"
                           colorScheme="red"
                           variant="outline"
+                          // size="50px"
                         />
                         <FcCancel
                           onClick={handleEditMode}
-                          size="xs"
                           colorScheme="red"
                           variant="outline"
+                          // size={ base: "1em", md: "50px" }
                         />
                         <Button
                           type="submit"
                           colorScheme="green"
                           variant="ghost"
-                          size="sm"
                           onClick={handleSave}
                         >
                           Save

@@ -36,7 +36,7 @@ const Home = () => {
       {data && (
         <>
           <Flex justifyContent={"center"}>
-            <Heading fontSize={{ base: 22 }} pt={10} pb={5}>
+            <Heading fontSize={{ base: 22, md: 30 }} pt={10} pb={5}>
               My thoughts and opinions
             </Heading>
           </Flex>
