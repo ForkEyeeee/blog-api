@@ -7,6 +7,9 @@ import {
   HStack,
   Spinner,
   Text,
+  Textarea,
+  Button,
+  Input,
 } from "@chakra-ui/react";
 import CardItem from "./CardItem";
 import useDataFetching from "../hooks/useDataFetching";
@@ -18,16 +21,32 @@ const Home = () => {
   const parsedToken = parseJwt(token);
   const isExpiredUser = validateToken(parsedToken);
   const [data, loading, error] = useDataFetching(location, token);
-  // const response = await fetch("/api/authorsession/posts", {
-  //   method: "GET",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     Authorization: `Bearer ${token}`,
-  //   },
-  // });
 
-  // const navigate = useNavigate();
-  // const [data, loading, error] = useDataFetching(location);
+  const handleSubmit = async e => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    // const published = formData.get("post");
+    try {
+      const response = await fetch(location, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          post: formData.get("post"),
+          title: formData.get("title"),
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(await response.text());
+      } else {
+        navigate(0);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   console.log(data);
 
@@ -67,6 +86,11 @@ const Home = () => {
               published={postItem.published}
             />
           ))}
+          <form onSubmit={handleSubmit}>
+            <Input name="title" />
+            <Textarea name="post" />
+            <Button type="submit">Add Post</Button>
+          </form>
         </>
       )}
     </Box>

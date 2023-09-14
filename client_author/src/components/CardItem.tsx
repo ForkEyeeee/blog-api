@@ -17,11 +17,11 @@ import {
   Select,
   Button,
 } from "@chakra-ui/react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 const CardItem = ({ url, title, content, time, published }: CardItemProps) => {
   const location = `http://localhost:5174/api${useLocation().pathname}`;
   const token = localStorage.getItem("jwt");
-
+  const navigate = useNavigate();
   const handleSubmit = async e => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -41,6 +41,7 @@ const CardItem = ({ url, title, content, time, published }: CardItemProps) => {
       if (!response.ok) {
         throw new Error(await response.text());
       } else {
+        navigate(0);
       }
     } catch (error) {
       console.error(error);
@@ -57,7 +58,7 @@ const CardItem = ({ url, title, content, time, published }: CardItemProps) => {
                 {title}
               </Heading>
               <Text fontSize={"2xs"}>{time}</Text>
-              <Select name="published" placeholder="Select option">
+              <Select name="published" placeholder="Select option" required>
                 <option value="true">published</option>
                 <option value="false">unpublished</option>
               </Select>

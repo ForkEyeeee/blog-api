@@ -17,6 +17,7 @@ router.put("/posts/:postid", comment_controller.update_comment_form_put);
 router.delete("/posts/:postid", comment_controller.delete_comment_form_delete);
 router.get("/authorsession/posts", auth_controller.authorsession_get);
 router.put("/authorsession/posts", auth_controller.authorsession_put);
+router.post("/authorsession/posts", auth_controller.create_post_post);
 //Post routes
 // router.post("/posts", post_controller.create_post_form_post);
 // router.put("/posts/:postid", post_controller.update_post_form_put);

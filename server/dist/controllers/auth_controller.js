@@ -153,3 +153,18 @@ exports.authorsession_put = asyncHandler(async (req, res, next) => {
     await Post.findOneAndUpdate({ _id: req.body.postid }, { published: req.body.published === "true" ? true : false });
     res.json({ Message: "Comment updated" });
 });
+exports.create_post_post = asyncHandler(async (req, res, next) => {
+    const usertoken = req.headers.authorization;
+    const token = usertoken.split(" ");
+    jwt.verify(token[1], process.env.signature);
+    console.log(req.body);
+    const newPost = new Post({
+        title: req.body.title,
+        content: req.body.content,
+        comments: [],
+        time: new Date().toJSON().slice(0, 10).split("-").reverse().join("/"),
+        published: false,
+    });
+    await newPost.save();
+    res.json({ Message: "post added" });
+});
