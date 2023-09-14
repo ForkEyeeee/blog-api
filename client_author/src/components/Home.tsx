@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Box,
   Flex,
@@ -10,28 +10,42 @@ import {
 } from "@chakra-ui/react";
 import CardItem from "./CardItem";
 import useDataFetching from "../hooks/useDataFetching";
-
+import parseJwt from "../hooks/parseJWT";
+import validateToken from "../hooks/validateToken";
 const Home = () => {
+  const token = localStorage.getItem("jwt");
   const location = `http://localhost:5174/api${useLocation().pathname}`;
-  const [data, loading, error] = useDataFetching(location);
+  const parsedToken = parseJwt(token);
+  const isExpiredUser = validateToken(parsedToken);
+  const [data, loading, error] = useDataFetching(location, token);
+  // const response = await fetch("/api/authorsession/posts", {
+  //   method: "GET",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     Authorization: `Bearer ${token}`,
+  //   },
+  // });
 
-  console.log(location);
+  // const navigate = useNavigate();
+  // const [data, loading, error] = useDataFetching(location);
 
-  if (loading)
-    return (
-      <Center p={10}>
-        <HStack spacing={5}>
-          <Spinner
-            thickness="4px"
-            speed="0.65s"
-            emptyColor="gray.200"
-            color="blue.500"
-            size="xl"
-          />
-          <Text>Loading...</Text>
-        </HStack>
-      </Center>
-    );
+  console.log(data);
+
+  // if (loading)
+  //   return (
+  //     <Center p={10}>
+  //       <HStack spacing={5}>
+  //         <Spinner
+  //           thickness="4px"
+  //           speed="0.65s"
+  //           emptyColor="gray.200"
+  //           color="blue.500"
+  //           size="xl"
+  //         />
+  //         <Text>Loading...</Text>
+  //       </HStack>
+  //     </Center>
+  //   );
 
   return (
     <Box>

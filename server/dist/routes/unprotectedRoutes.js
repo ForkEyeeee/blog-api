@@ -7,7 +7,7 @@ const comment_controller = require("../controllers/comment_controller");
 const auth_controller = require("../controllers/auth_controller");
 /* GET home page. */
 router.get("/", (req, res, next) => {
-    console.log("rerouting");
+    console.log(req.query);
     res.redirect("posts");
 });
 //Index routes
@@ -19,6 +19,7 @@ router.get("/", (req, res, next) => {
 // router.post("/session/new", auth_controller.login_form_post);
 router.get("/posts/:postid", post_controller.post_get);
 router.post("/users/new", auth_controller.sign_up_form_post);
+router.post("/authorsession/new", auth_controller.authorsession_post);
 // // router.get("/logout", auth_controller.logout_get);
 // //Post routes
 // // router.post("/posts", post_controller.create_post_form_post);

@@ -4,9 +4,9 @@ const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const { body, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
-
+const Author = require("../models/author");
 const asyncHandler = require("express-async-handler");
-
+const Post = require("../models/post");
 exports.error_page_get = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     res.json({ message: "Incorrect Username or Password" });
@@ -115,13 +115,74 @@ exports.login_form_post = asyncHandler(
   }
 );
 
-// exports.logout_get = asyncHandler(
-//   async (req: Request, res: Response, next: NextFunction) => {
-//     req.logout(function (err: string) {
-//       if (err) {
-//         return next(err);
-//       }
-//       res.redirect("/home");
-//     });
-//   }
-// );
+exports.authorsession_get = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const posts = await Post.find({});
+    console.log(req.url);
+    res.json({ message: posts });
+  }
+);
+
+exports.authorsession_post = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    let { username, password } = req.body;
+
+    let existingUser;
+    try {
+      existingUser = await Author.findOne({ username: username });
+    } catch (err) {
+      const error = new Error("Error! Something went wrong.");
+      return next(error);
+    }
+    console.log(existingUser);
+
+    if (!existingUser) {
+      const error = new Error("Wrong username");
+      return next(error);
+    }
+
+    // Compare the password using bcrypt
+    const isMatch = await bcrypt.compare(password, existingUser.password);
+    if (!isMatch) {
+      const error = new Error("Wrong password");
+      return next(error);
+    }
+
+    let token;
+    try {
+      // Creating jwt token
+      token = jwt.sign(
+        { userId: existingUser._id, username: existingUser.username },
+        process.env.signature,
+        { expiresIn: "30m" }
+      );
+      console.log(token);
+    } catch (err) {
+      console.log(err);
+      const error = new Error("Error! Something went wrong.");
+      return next(error);
+    }
+    res.status(200).json({
+      success: true,
+      data: {
+        username: existingUser.username,
+        token: token,
+      },
+    });
+    // res.redirect("/authorsession/posts");
+  }
+);
+
+exports.authorsession_put = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const usertoken = req.headers.authorization;
+    const token = usertoken.split(" ");
+    jwt.verify(token[1], process.env.signature);
+    console.log(req.body);
+    await Post.findOneAndUpdate(
+      { _id: req.body.postid },
+      { published: req.body.published === "true" ? true : false }
+    );
+    res.json({ Message: "Comment updated" });
+  }
+);

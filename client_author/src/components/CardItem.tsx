@@ -14,33 +14,68 @@ import {
   VStack,
   Divider,
   Flex,
+  Select,
+  Button,
 } from "@chakra-ui/react";
+import { useLocation } from "react-router-dom";
+const CardItem = ({ url, title, content, time, published }: CardItemProps) => {
+  const location = `http://localhost:5174/api${useLocation().pathname}`;
+  const token = localStorage.getItem("jwt");
 
-const CardItem = ({ url, title, content, time }: CardItemProps) => {
+  const handleSubmit = async e => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const published = formData.get("published");
+    try {
+      const response = await fetch(location, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          published: published,
+          postid: url,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(await response.text());
+      } else {
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
-      <Card>
-        <ChakraLink as={ReactRouterLink} to={`/posts/${url}`}>
+      <form onSubmit={handleSubmit}>
+        <Card>
           <CardHeader pb={0}>
             <VStack align={{ base: "start", md: "center" }}>
               <Heading size="md" color="rgb(94, 192, 241)">
                 {title}
               </Heading>
               <Text fontSize={"2xs"}>{time}</Text>
+              <Select name="published" placeholder="Select option">
+                <option value="true">published</option>
+                <option value="false">unpublished</option>
+              </Select>
+              <Button type="submit">Save</Button>
+              <Text>{published ? "published" : "unpublished"}</Text>
             </VStack>
           </CardHeader>
           <CardBody>
             <Stack spacing="4">
               <Box>{content}</Box>
             </Stack>
-
             <Flex justifyContent={"center"}>
               <Divider pt={10} width={"50%"} />
             </Flex>
           </CardBody>
-        </ChakraLink>
-        <CardFooter flexDir={"column"}></CardFooter>
-      </Card>
+          <CardFooter flexDir={"column"}></CardFooter>
+        </Card>
+      </form>
     </>
   );
 };
