@@ -6,6 +6,7 @@ const comment_controller = require("../controllers/comment_controller");
 const auth_controller = require("../controllers/auth_controller");
 /* GET home page. */
 router.get("/", (req: Request, res: Response, next: NextFunction) => {
+  console.log("rerouting");
   res.redirect("posts");
 });
 //Index routes
