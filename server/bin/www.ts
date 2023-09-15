@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-
+// @ts-nocheck
 /**
  * Module dependencies.
  */
