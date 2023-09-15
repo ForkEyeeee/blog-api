@@ -19,16 +19,19 @@ const Login = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const response = await fetch("/api/session/new", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
-    });
+    const response = await fetch(
+      "https://blog-api-frontend-efn0.onrender.com/session/new",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      }
+    );
     console.log(response);
     const { data, success, message } = await response.json();
-
+    console.log(data);
     if (success) {
       localStorage.setItem("jwt", data.token);
       navigate("/");
