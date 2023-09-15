@@ -6,7 +6,8 @@ import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import Aboutus from "./components/AboutUs";
 import ErrorPage from "./components/ErrorPage";
-function App() {
+
+const App = () => {
   return (
     <>
       <NavBar />
@@ -16,10 +17,10 @@ function App() {
         <Route path="/users/new" element={<SignUp />} />
         <Route path="/session/new" element={<Login />} />
         <Route path="/Aboutus" element={<Aboutus />} />
-        <Route path="/error" element={<ErrorPage />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
   );
-}
+};
 
 export default App;
