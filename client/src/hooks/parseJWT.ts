@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 const parseJwt = tokenData => {
   if (tokenData === "undefined" || tokenData === null) {
     return;
