@@ -30,7 +30,6 @@ const Login = () => {
       }
     );
     const { data, success, message } = await response.json();
-    console.log(data);
 
     // console.log(await response.json());
     if (success) {

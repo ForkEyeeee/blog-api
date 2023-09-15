@@ -20,13 +20,16 @@ const SignUp = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const response = await fetch("/api/users/new", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
-    });
+    const response = await fetch(
+      "https://blog-api-backend-iosn.onrender.com/api/users/new",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      }
+    );
 
     const data = await response.json();
 

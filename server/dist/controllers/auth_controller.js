@@ -67,6 +67,7 @@ exports.login_form_post = asyncHandler(async (req, res, next) => {
     let existingUser;
     try {
         existingUser = await User.findOne({ username: username });
+        console.log(existingUser);
     }
     catch (err) {
         const error = new Error("Error! Something went wrong.");

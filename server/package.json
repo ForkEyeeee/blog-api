@@ -10,7 +10,7 @@
     "build": "tsc",
     "build:watch": "tsc -w",
     "dev": "concurrently \"npm run build:watch\" \"nodemon dist/bin/www\"",
-    "serverstart": "SET DEBUG=blog-api & npm run devstart",
+    "serverstart": "SET DEBUG=blog-api & npm run dev",
     "render-postbuild-server": "npm install && tsc"
   },
   "dependencies": {
