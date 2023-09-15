@@ -75,7 +75,7 @@ const SignUp = () => {
             name="password"
             value={password}
             onChange={e => setPassword(e.target.value)}
-            type="password"
+            type="text"
             placeholder="Choose a password"
             maxW={"85%"}
             required
