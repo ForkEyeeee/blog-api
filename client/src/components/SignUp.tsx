@@ -7,7 +7,6 @@ import {
   Input,
   Button,
   Text,
-  VStack,
   Flex,
 } from "@chakra-ui/react";
 

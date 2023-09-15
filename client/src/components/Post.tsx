@@ -1,13 +1,5 @@
 import { useLocation } from "react-router-dom";
-import {
-  Box,
-  Text,
-  Flex,
-  Heading,
-  Center,
-  HStack,
-  Spinner,
-} from "@chakra-ui/react";
+import { Box, Text, Center, HStack, Spinner } from "@chakra-ui/react";
 import useDataFetching from "../hooks/useDataFetching";
 import Comment from "./Comment";
 import CreateCommentForm from "./CreateCommentForm";
@@ -31,6 +23,14 @@ const Post = () => {
         </HStack>
       </Center>
     );
+
+  if (error) {
+    return (
+      <Box>
+        <Text>Failed to fetch post</Text>
+      </Box>
+    );
+  }
 
   return (
     <Box>

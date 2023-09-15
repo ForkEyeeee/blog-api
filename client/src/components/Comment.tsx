@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/fontawesome-free-solid";
 import { RiDeleteBin5Line } from "react-icons/ri";
-import { FcCancel } from "react-icons/fc";
+import { GiCancel } from "react-icons/gi";
 import parseJwt from "../hooks/parseJWT";
 import validateToken from "../hooks/validateToken";
 import { EditIcon } from "@chakra-ui/icons";
@@ -20,8 +20,6 @@ import {
   Button,
   Divider,
   useToast,
-  Spinner,
-  Center,
 } from "@chakra-ui/react";
 
 const Comment = ({ comment }: { comment: CommentProps }) => {
@@ -106,6 +104,14 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
       } else {
         handleEditMode();
         handleVisibleMode();
+        toast({
+          title: "Deleted.",
+          description: "Comment successfully deleted.",
+          status: "success",
+          duration: 2500,
+          isClosable: true,
+          position: "bottom",
+        });
       }
     } catch (error) {
       console.error(error);
@@ -125,7 +131,10 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
                   pl={2}
                   justifyContent={"space-between"}
                 >
-                  <HStack justifyContent={"flex-start"}>
+                  <HStack
+                    justifyContent={"flex-start"}
+                    gap={{ base: "5", md: "10" }}
+                  >
                     <FontAwesomeIcon
                       icon={faUserCircle}
                       style={{ color: "#808080" }}
@@ -143,16 +152,10 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
                       <HStack>
                         <RiDeleteBin5Line
                           onClick={handleDelete}
-                          colorScheme="red"
                           variant="outline"
-                          // size="50px"
+                          color="red"
                         />
-                        <FcCancel
-                          onClick={handleEditMode}
-                          colorScheme="red"
-                          variant="outline"
-                          // size={ base: "1em", md: "50px" }
-                        />
+                        <GiCancel onClick={handleEditMode} variant="outline" />
                         <Button
                           type="submit"
                           colorScheme="green"
@@ -173,6 +176,8 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
                 ) : (
                   <Input
                     type="text"
+                    size="lg"
+                    variant="flushed"
                     name="user_comment"
                     onChange={handleInputOnChange}
                     value={inputText === "" ? comment.content : inputText}
@@ -180,7 +185,7 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
                 )}
               </VStack>
             </CardBody>
-            <Divider orientation="horizontal" color={"gray"} />
+            <Divider orientation="horizontal" color={"gray.300"} />
           </form>
         </Card>
       )}

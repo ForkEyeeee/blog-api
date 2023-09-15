@@ -1,4 +1,4 @@
-import { Box, Heading, Text, VStack, Divider, Image } from "@chakra-ui/react";
+import { Box, Heading, Text, VStack, Divider } from "@chakra-ui/react";
 
 const AboutUs = () => {
   return (
@@ -17,14 +17,6 @@ const AboutUs = () => {
           subjects ranging from technology to philosophy.
         </Text>
       </Box>
-      {/* <Box maxW="600px">
-        <Image
-          src="path_to_some_image.jpg"
-          alt="Blogging team photo"
-          borderRadius="lg"
-          boxShadow="xl"
-        />
-      </Box> */}
       <Box maxW="600px">
         <Text fontSize="md" textAlign="justify">
           Our team of writers hails from diverse backgrounds, each bringing a

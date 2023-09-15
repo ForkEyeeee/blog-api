@@ -31,6 +31,14 @@ const Home = () => {
       </Center>
     );
 
+  if (error) {
+    return (
+      <Box>
+        <Text>Failed to fetch post</Text>
+      </Box>
+    );
+  }
+
   return (
     <Box>
       {data && (

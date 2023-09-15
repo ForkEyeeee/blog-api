@@ -3,7 +3,6 @@ import useDataFetching from "../hooks/useDataFetching";
 import { Box, Text } from "@chakra-ui/react";
 
 const ErrorPage = () => {
-  // const token = localStorage.getItem("jwt");
   const location = `http://localhost:5173/api${useLocation().pathname}`;
   const [data, loading, error] = useDataFetching(location);
 

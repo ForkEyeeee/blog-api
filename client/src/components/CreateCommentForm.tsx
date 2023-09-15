@@ -1,4 +1,3 @@
-import CreateCommentFormProps from "../types/createCommentFormProps";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   Box,
@@ -11,7 +10,7 @@ import {
 import parseJwt from "../hooks/parseJWT";
 import validateToken from "../hooks/validateToken";
 
-const CreateCommentForm = ({ postid }: CreateCommentFormProps) => {
+const CreateCommentForm = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("jwt");
   const location = `http://localhost:5173/api${useLocation().pathname}`;
@@ -54,7 +53,13 @@ const CreateCommentForm = ({ postid }: CreateCommentFormProps) => {
             </AbsoluteCenter>
           </Box>
           <form onSubmit={handleSubmit}>
-            <Textarea name="comment" placeholder="Enter a new comment" />
+            <Flex justifyContent={"center"}>
+              <Textarea
+                name="comment"
+                placeholder="Enter a new comment"
+                maxW={"75%"}
+              />
+            </Flex>
             <Flex justifyContent="center">
               <Button
                 colorScheme="teal"

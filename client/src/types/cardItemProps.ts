@@ -3,6 +3,7 @@ type CardItemProps = {
   title: string;
   content: string;
   time: string;
+  published: boolean;
 };
 
 export default CardItemProps;

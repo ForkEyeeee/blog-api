@@ -81,14 +81,14 @@ const NavBar = () => {
                 </ChakraLink>
               </>
             ) : (
-              <Box
+              <ChakraLink
                 onClick={() => {
                   localStorage.removeItem("jwt");
                   navigate(0);
                 }}
               >
                 Logout
-              </Box>
+              </ChakraLink>
             )}
           </HStack>
         </Box>
