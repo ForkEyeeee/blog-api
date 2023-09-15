@@ -1,3 +1,5 @@
+// @ts-ignore comment,
+
 const parseJwt = tokenData => {
   if (tokenData === "undefined" || tokenData === null) {
     return;

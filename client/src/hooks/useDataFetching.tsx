@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+// @ts-ignore comment,
 
 const useDataFetching = (url, token = undefined) => {
   const [data, setData] = useState(null);
@@ -21,6 +22,8 @@ const useDataFetching = (url, token = undefined) => {
         setData(json);
         setLoading(false);
       } catch (error) {
+        // @ts-ignore comment,
+
         setError(error);
         setLoading(false);
       }

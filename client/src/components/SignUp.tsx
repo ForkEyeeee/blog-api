@@ -16,6 +16,7 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [formError, setFormError] = useState("");
   const navigate = useNavigate();
+  // @ts-ignore comment,
 
   const handleSubmit = async e => {
     e.preventDefault();

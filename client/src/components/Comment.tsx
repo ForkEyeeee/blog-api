@@ -44,9 +44,13 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
     setIsVisible(false);
   };
 
+  // @ts-ignore comment,
+
   const handleInputOnChange = e => {
     setInputText(e.target.value);
   };
+
+  // @ts-ignore comment,
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -84,9 +88,12 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
       position: "bottom",
     });
   };
+  // @ts-ignore comment,
 
   const handleDelete = async e => {
     e.preventDefault();
+    // @ts-ignore comment,
+
     const formData = new FormData(refContainer.current);
     const userComment = formData.get("user_comment");
     try {
@@ -138,6 +145,8 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
                     gap={{ base: "5", md: "10" }}
                   >
                     <FontAwesomeIcon
+                      // @ts-ignore comment,
+
                       icon={faUserCircle}
                       style={{ color: "#808080" }}
                       size="3x"

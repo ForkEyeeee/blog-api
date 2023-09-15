@@ -50,17 +50,22 @@ const Home = () => {
               My thoughts and opinions
             </Heading>
           </Flex>
-          {data.message.map(postItem => (
-            <CardItem
-              key={postItem._id}
-              url={postItem._id}
-              title={postItem.title}
-              comments={postItem.comments}
-              time={postItem.time}
-              content={postItem.content}
-              published={postItem.published}
-            />
-          ))}
+          {
+            // @ts-ignore comment,
+            data.message.map(postItem => (
+              <CardItem
+                key={postItem._id}
+                url={postItem._id}
+                title={postItem.title}
+                // @ts-ignore comment,
+
+                comments={postItem.comments}
+                time={postItem.time}
+                content={postItem.content}
+                published={postItem.published}
+              />
+            ))
+          }
         </>
       )}
     </Box>

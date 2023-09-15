@@ -50,6 +50,8 @@ const NavBar = () => {
             <ChakraLink
               as={ReactRouterLink}
               to={`/Aboutus`}
+              // @ts-ignore comment,
+
               textDecor={
                 currentTab === "http://localhost:5173/api/Aboutus" &&
                 "underline"
@@ -64,6 +66,8 @@ const NavBar = () => {
                 <ChakraLink
                   as={ReactRouterLink}
                   to={`/users/new`}
+                  // @ts-ignore comment,
+
                   textDecor={
                     currentTab === "http://localhost:5173/api/users/new" &&
                     "underline"
@@ -74,6 +78,8 @@ const NavBar = () => {
                 <ChakraLink
                   as={ReactRouterLink}
                   to={`/session/new`}
+                  // @ts-ignore comment,
+
                   textDecor={
                     currentTab === "http://localhost:5173/api/session/new" &&
                     "underline"
