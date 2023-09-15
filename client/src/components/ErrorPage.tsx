@@ -3,7 +3,7 @@ import useDataFetching from "../hooks/useDataFetching";
 import { Box, Text } from "@chakra-ui/react";
 
 const ErrorPage = () => {
-  const location = `https://blog-api-production-0a45.up.railway.app/api${
+  const location = `https://blog-api-production-83d4.up.railway.app/api${
     useLocation().pathname
   }`;
   const [data, loading, error] = useDataFetching(location);

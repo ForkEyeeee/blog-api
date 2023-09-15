@@ -12,7 +12,7 @@ import { useState } from "react";
 const NavBar = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("jwt");
-  const location = `https://blog-api-production-0a45.up.railway.app/api${
+  const location = `https://blog-api-production-83d4.up.railway.app/api${
     useLocation().pathname
   }`;
   const parsedToken = parseJwt(token);
