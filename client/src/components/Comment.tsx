@@ -30,7 +30,7 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
   const toast = useToast();
 
   const token = localStorage.getItem("jwt");
-  const location = `https://blog-api-production-83d4.up.railway.app/api${
+  const location = `https://blog-api-backend-iosn.onrender.com/api${
     useLocation().pathname
   }`;
   const parsedToken = parseJwt(token);

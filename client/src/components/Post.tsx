@@ -5,7 +5,7 @@ import Comment from "./Comment";
 import CreateCommentForm from "./CreateCommentForm";
 
 const Post = () => {
-  const location = `https://blog-api-production-83d4.up.railway.app/api${
+  const location = `https://blog-api-backend-iosn.onrender.com/api${
     useLocation().pathname
   }`;
   const [data, loading, error] = useDataFetching(location);

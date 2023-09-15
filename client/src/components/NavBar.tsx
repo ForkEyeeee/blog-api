@@ -12,7 +12,7 @@ import { useState } from "react";
 const NavBar = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("jwt");
-  const location = `https://blog-api-production-83d4.up.railway.app/api${
+  const location = `https://blog-api-backend-iosn.onrender.com/api${
     useLocation().pathname
   }`;
   const parsedToken = parseJwt(token);
@@ -53,7 +53,8 @@ const NavBar = () => {
               // @ts-ignore comment,
 
               textDecor={
-                currentTab === "http://localhost:5173/api/Aboutus" &&
+                currentTab ===
+                  "https://blog-api-backend-iosn.onrender.com/api/Aboutus" &&
                 "underline"
               }
             >
@@ -69,7 +70,8 @@ const NavBar = () => {
                   // @ts-ignore comment,
 
                   textDecor={
-                    currentTab === "http://localhost:5173/api/users/new" &&
+                    currentTab ===
+                      "https://blog-api-backend-iosn.onrender.com/api/users/new" &&
                     "underline"
                   }
                 >
@@ -81,7 +83,8 @@ const NavBar = () => {
                   // @ts-ignore comment,
 
                   textDecor={
-                    currentTab === "http://localhost:5173/api/session/new" &&
+                    currentTab ===
+                      "https://blog-api-backend-iosn.onrender.com/api/session/new" &&
                     "underline"
                   }
                 >
