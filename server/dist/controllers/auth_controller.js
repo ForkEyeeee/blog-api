@@ -63,6 +63,7 @@ exports.sign_up_form_post = [
 ];
 exports.login_form_post = asyncHandler(async (req, res, next) => {
     let { username, password } = req.body;
+    console.log("here");
     let existingUser;
     try {
         existingUser = await User.findOne({ username: username });

@@ -20,7 +20,7 @@ const Login = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     const response = await fetch(
-      "https://blog-api-frontend-efn0.onrender.com/session/new",
+      "blog-api-frontend-efn0.onrender.com/api/session/new",
       {
         method: "POST",
         headers: {
@@ -29,9 +29,10 @@ const Login = () => {
         body: JSON.stringify({ username, password }),
       }
     );
-    console.log(response);
     const { data, success, message } = await response.json();
-    console.log(await response.json());
+    console.log(data);
+
+    // console.log(await response.json());
     if (success) {
       localStorage.setItem("jwt", data.token);
       navigate("/");
