@@ -9,7 +9,7 @@
     "start": "node dist/bin/www",
     "build": "tsc",
     "build:watch": "tsc -w",
-    "devstart": "concurrently \"npm run build:watch\" \"nodemon dist/bin/www\"",
+    "dev": "concurrently \"npm run build:watch\" \"nodemon dist/bin/www\"",
     "serverstart": "SET DEBUG=blog-api & npm run devstart"
   },
   "dependencies": {
