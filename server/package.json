@@ -11,7 +11,7 @@
     "build:watch": "tsc -w",
     "dev": "concurrently \"npm run build:watch\" \"nodemon dist/bin/www\"",
     "serverstart": "SET DEBUG=blog-api & npm run devstart",
-    "render-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "render-postbuild-server": "npm install && tsc"
   },
   "dependencies": {
     "async": "^3.2.4",
