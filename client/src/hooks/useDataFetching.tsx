@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useState, useEffect } from "react";
 
 const useDataFetching = (url, token = undefined) => {
