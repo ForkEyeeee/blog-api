@@ -38,7 +38,7 @@ const CreateCommentForm = () => {
       if (!response.ok) {
         throw new Error(await response.text());
       } else {
-        navigate(0);
+        navigate(location);
       }
     } catch (error) {
       console.error(error);
