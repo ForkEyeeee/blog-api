@@ -156,12 +156,19 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
                       </Box>
                     ) : (
                       <HStack>
-                        <RiDeleteBin5Line
-                          onClick={handleDelete}
-                          variant="outline"
-                          color="red"
-                        />
-                        <GiCancel onClick={handleEditMode} variant="outline" />
+                        <Box cursor={"pointer"}>
+                          <RiDeleteBin5Line
+                            onClick={handleDelete}
+                            variant="outline"
+                            color="red"
+                          />
+                        </Box>
+                        <Box cursor={"pointer"}>
+                          <GiCancel
+                            onClick={handleEditMode}
+                            variant="outline"
+                          />
+                        </Box>
                         <Button
                           type="submit"
                           colorScheme="green"
