@@ -30,7 +30,7 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
   const toast = useToast();
 
   const token = localStorage.getItem("jwt");
-  const location = `https://blog-api-production-0a45.up.railway.app${
+  const location = `https://blog-api-production-0a45.up.railway.app/api${
     useLocation().pathname
   }`;
   const parsedToken = parseJwt(token);

@@ -13,7 +13,7 @@ import validateToken from "../hooks/validateToken";
 const CreateCommentForm = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("jwt");
-  const location = `https://blog-api-production-0a45.up.railway.app${
+  const location = `https://blog-api-production-0a45.up.railway.app/api${
     useLocation().pathname
   }`;
   const data = parseJwt(token);
