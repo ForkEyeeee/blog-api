@@ -1,6 +1,7 @@
 #! /usr/bin/env node
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+// @ts-nocheck
 console.log("This script populates some test posts and comments to your database.");
 // Get arguments passed on command line
 const userArgs = process.argv.slice(2);

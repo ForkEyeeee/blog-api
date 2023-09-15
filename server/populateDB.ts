@@ -1,5 +1,5 @@
 #! /usr/bin/env node
-
+// @ts-nocheck
 console.log(
   "This script populates some test posts and comments to your database."
 );

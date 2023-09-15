@@ -1,3 +1,4 @@
+// @ts-nocheck
 require("dotenv").config();
 import { Request, Response, NextFunction } from "express";
 const createError = require("http-errors");

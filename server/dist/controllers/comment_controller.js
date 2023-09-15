@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+// @ts-nocheck
 require("dotenv").config();
 const Comment = require("../models/comment");
 const { body, validationResult } = require("express-validator");

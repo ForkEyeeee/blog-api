@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+// @ts-nocheck
 require("dotenv").config();
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");

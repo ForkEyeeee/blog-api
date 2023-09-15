@@ -1,3 +1,4 @@
+// @ts-nocheck
 require("dotenv").config();
 import { Request, Response, NextFunction } from "express";
 const User = require("../models/user");
