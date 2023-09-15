@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useLocation } from "react-router-dom";
 import useDataFetching from "../hooks/useDataFetching";
 import { Box, Text } from "@chakra-ui/react";

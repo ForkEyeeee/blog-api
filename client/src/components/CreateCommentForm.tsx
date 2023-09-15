@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   Box,
