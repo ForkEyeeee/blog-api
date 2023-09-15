@@ -30,7 +30,7 @@ const CardItem = ({ url, title, content, time, published }: CardItemProps) => {
               </VStack>
             </CardHeader>
             <CardBody>
-              <Stack spacing="4" textAlign={"center"}>
+              <Stack spacing="4" alignItems={"center"}>
                 <Box>{content}</Box>
               </Stack>
 
