@@ -30,8 +30,6 @@ const Login = () => {
       }
     );
     const { data, success, message } = await response.json();
-
-    // console.log(await response.json());
     if (success) {
       localStorage.setItem("jwt", data.token);
       navigate("/");
