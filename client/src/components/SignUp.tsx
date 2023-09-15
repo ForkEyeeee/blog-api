@@ -35,7 +35,7 @@ const SignUp = () => {
 
     if (data.success) {
       localStorage.setItem("jwt", data.token);
-      navigate("/");
+      navigate("/session/new");
     } else {
       setFormError(data.message);
     }

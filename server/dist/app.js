@@ -72,6 +72,6 @@ app.use(function (err, req, res, next) {
     // render the error page
     res.status(err.status || 500);
     console.log(err);
-    res.json({ message: err, success: false });
+    res.json({ message: res.locals.message, success: false });
 });
 module.exports = app;

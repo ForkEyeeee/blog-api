@@ -25,9 +25,7 @@ exports.sign_up_form_post = [
     .isLength({ min: 1 })
     .escape(),
   body("confirmpassword").custom((value, { req }) => {
-    if (value !== req.body.confirmpassword) {
-      console.log(value);
-      console.log(req.body);
+    if (value !== req.body.password) {
       throw new Error("Passwords do not match");
     }
     return true;
