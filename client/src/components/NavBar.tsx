@@ -50,8 +50,6 @@ const NavBar = () => {
             <ChakraLink
               as={ReactRouterLink}
               to={`/Aboutus`}
-              // @ts-ignore comment,
-
               textDecor={
                 currentTab ===
                   "https://blog-api-backend-iosn.onrender.com/api/Aboutus" &&
@@ -67,8 +65,6 @@ const NavBar = () => {
                 <ChakraLink
                   as={ReactRouterLink}
                   to={`/users/new`}
-                  // @ts-ignore comment,
-
                   textDecor={
                     currentTab ===
                       "https://blog-api-backend-iosn.onrender.com/api/users/new" &&
@@ -80,8 +76,6 @@ const NavBar = () => {
                 <ChakraLink
                   as={ReactRouterLink}
                   to={`/session/new`}
-                  // @ts-ignore comment,
-
                   textDecor={
                     currentTab ===
                       "https://blog-api-backend-iosn.onrender.com/api/session/new" &&

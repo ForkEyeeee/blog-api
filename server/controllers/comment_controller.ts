@@ -1,4 +1,3 @@
-// @ts-nocheck
 require("dotenv").config();
 import { Request, Response, NextFunction } from "express";
 const Comment = require("../models/comment");

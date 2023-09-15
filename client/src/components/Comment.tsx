@@ -38,19 +38,16 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
 
   const handleEditMode = () => {
     setIsEditMode(prevIsEdit => !prevIsEdit);
+    setInputText(comment.content);
   };
 
   const handleVisibleMode = () => {
     setIsVisible(false);
   };
 
-  // @ts-ignore comment,
-
   const handleInputOnChange = e => {
     setInputText(e.target.value);
   };
-
-  // @ts-ignore comment,
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -72,6 +69,7 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
         throw new Error(await response.text());
       } else {
         handleEditMode();
+        setInputText(inputText);
       }
     } catch (error) {
       console.error(error);
@@ -79,21 +77,19 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
   };
 
   const handleSave = () => {
-    toast({
-      title: "Saved.",
-      description: "Comment successfully saved.",
-      status: "success",
-      duration: 2500,
-      isClosable: true,
-      position: "bottom",
-    });
+    inputText !== "" &&
+      toast({
+        title: "Saved.",
+        description: "Comment successfully saved.",
+        status: "success",
+        duration: 2500,
+        isClosable: true,
+        position: "bottom",
+      });
   };
-  // @ts-ignore comment,
 
   const handleDelete = async e => {
     e.preventDefault();
-    // @ts-ignore comment,
-
     const formData = new FormData(refContainer.current);
     const userComment = formData.get("user_comment");
     try {
@@ -145,8 +141,6 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
                     gap={{ base: "5", md: "10" }}
                   >
                     <FontAwesomeIcon
-                      // @ts-ignore comment,
-
                       icon={faUserCircle}
                       style={{ color: "#808080" }}
                       size="3x"
@@ -191,7 +185,8 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
                     variant="flushed"
                     name="user_comment"
                     onChange={handleInputOnChange}
-                    value={inputText === "" ? comment.content : inputText}
+                    defaultValue={comment.content}
+                    required
                   />
                 )}
               </VStack>

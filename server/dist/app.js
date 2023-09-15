@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-// @ts-nocheck
 require("dotenv").config();
 const createError = require("http-errors");
 const express = require("express");

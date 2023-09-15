@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-// @ts-nocheck
 require("dotenv").config();
 const Post = require("../models/post");
 const Comment = require("../models/comment");

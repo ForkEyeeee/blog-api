@@ -40,31 +40,17 @@ const Post = () => {
         <>
           <Box>
             <Text fontSize="3xl" fontWeight={"bold"} p={5} textAlign={"center"}>
-              {
-                // @ts-ignore comment,
-                data.post.title
-              }
+              {data.post.title}
             </Text>
           </Box>
           <Text pl={5} pr={5} pb={5}>
-            {
-              // @ts-ignore comment,
-              data.post.content
-            }
+            {data.post.content}
           </Text>
-          {
-            // @ts-ignore comment,
-            data.comments.map(comment => (
-              <Comment key={comment._id} comment={comment} />
-            ))
-          }
+          {data.comments.map(comment => (
+            <Comment key={comment._id} comment={comment} />
+          ))}
 
-          <CreateCommentForm // @ts-ignore comment,
-            postid={
-              // @ts-ignore comment,
-              data.post._id
-            }
-          />
+          <CreateCommentForm postid={data.post._id} />
         </>
       )}
     </Box>

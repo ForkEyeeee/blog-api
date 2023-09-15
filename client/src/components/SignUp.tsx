@@ -16,7 +16,6 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [formError, setFormError] = useState("");
   const navigate = useNavigate();
-  // @ts-ignore comment,
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -58,6 +57,7 @@ const SignUp = () => {
             type="email"
             placeholder="Enter in email format"
             maxW={"85%"}
+            required
           />
         </FormControl>
 
@@ -77,6 +77,7 @@ const SignUp = () => {
             type="password"
             placeholder="Choose a password"
             maxW={"85%"}
+            required
           />
         </FormControl>
         <FormControl
@@ -95,6 +96,7 @@ const SignUp = () => {
             type="password"
             placeholder="Confirm your password"
             maxW={"85%"}
+            required
           />
         </FormControl>
         <Text color="red">{formError && formError}</Text>

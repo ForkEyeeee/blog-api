@@ -12,12 +12,7 @@ const ErrorPage = () => {
     <Box>
       {data && (
         <>
-          <Text fontSize="3xl">
-            {
-              // @ts-ignore comment,
-              data.message
-            }
-          </Text>
+          <Text fontSize="3xl">{data.message}</Text>
         </>
       )}
     </Box>
