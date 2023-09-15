@@ -20,7 +20,7 @@ const Login = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     const response = await fetch(
-      "blog-api-frontend-efn0.onrender.com/api/session/new",
+      "https://blog-api-frontend-efn0.onrender.com/api/session/new",
       {
         method: "POST",
         headers: {
