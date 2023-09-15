@@ -13,7 +13,9 @@ import validateToken from "../hooks/validateToken";
 const CreateCommentForm = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("jwt");
-  const location = `http://localhost:5173/api${useLocation().pathname}`;
+  const location = `https://blog-api-production-0a45.up.railway.app${
+    useLocation().pathname
+  }`;
   const data = parseJwt(token);
   const parsedToken = parseJwt(token);
   const isExpiredUser = validateToken(parsedToken);

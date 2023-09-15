@@ -5,7 +5,9 @@ import Comment from "./Comment";
 import CreateCommentForm from "./CreateCommentForm";
 
 const Post = () => {
-  const location = `http://localhost:5173/api${useLocation().pathname}`;
+  const location = `${process.env.REACT_APP_API_ENDPOINT}${
+    useLocation().pathname
+  }`;
   const [data, loading, error] = useDataFetching(location);
 
   if (loading)

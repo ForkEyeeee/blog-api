@@ -30,7 +30,9 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
   const toast = useToast();
 
   const token = localStorage.getItem("jwt");
-  const location = `http://localhost:5173/api${useLocation().pathname}`;
+  const location = `https://blog-api-production-0a45.up.railway.app${
+    useLocation().pathname
+  }`;
   const parsedToken = parseJwt(token);
   const isExpiredUser = validateToken(parsedToken);
 

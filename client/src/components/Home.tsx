@@ -12,7 +12,9 @@ import CardItem from "./CardItem";
 import useDataFetching from "../hooks/useDataFetching";
 
 const Home = () => {
-  const location = `http://localhost:5173/api${useLocation().pathname}`;
+  const location = `https://blog-api-production-0a45.up.railway.app${
+    useLocation().pathname
+  }`;
   const [data, loading, error] = useDataFetching(location);
 
   if (loading)
