@@ -100,6 +100,7 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
         body: JSON.stringify({
           userComment: userComment,
           commentId: comment._id,
+          username: comment.username,
         }),
       });
       if (!response.ok) {

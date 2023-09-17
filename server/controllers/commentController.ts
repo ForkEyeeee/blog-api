@@ -64,14 +64,19 @@ exports.createCommentFormPost = [
 
 exports.deleteCommentFormDelete = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    let { usercomment, commentId } = req.body;
-    await Comment.deleteOne({ _id: commentId });
-    res.json({ message: "Comment deleted" });
-  }
-);
-
-exports.commentListGet = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    res.json({ message: "GET Comment List" });
+    try {
+      const usertoken = req.headers.authorization;
+      const token = usertoken.split(" ");
+      const decoded = jwt.verify(token[1], process.env.signature);
+      let { commentId, username } = req.body;
+      if (username !== decoded.username) {
+        const error = new Error("Failed to delete comment.");
+        return next(error);
+      }
+      await Comment.deleteOne({ _id: commentId });
+      res.json({ message: "Comment deleted" });
+    } catch (error) {
+      res.json({ Message: error });
+    }
   }
 );

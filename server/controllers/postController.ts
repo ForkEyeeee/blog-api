@@ -13,18 +13,6 @@ exports.postListGet = asyncHandler(
   }
 );
 
-exports.deletePostFormGet = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    res.json({ message: "GET Delete a Post" });
-  }
-);
-
-exports.deletePostFormDelete = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    res.json({ message: "DELETE Delete a Post" });
-  }
-);
-
 exports.postGet = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const post = await Post.findOne({ _id: req.params.postid });
@@ -36,12 +24,6 @@ exports.postGet = asyncHandler(
       _id: 1,
     });
     res.json({ post, comments });
-  }
-);
-
-exports.updatePostFormPut = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    res.json({ message: "PUT Update a Post" });
   }
 );
 

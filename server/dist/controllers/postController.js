@@ -9,12 +9,6 @@ exports.postListGet = asyncHandler(async (req, res, next) => {
     console.log(req.url);
     res.json({ message: posts });
 });
-exports.deletePostFormGet = asyncHandler(async (req, res, next) => {
-    res.json({ message: "GET Delete a Post" });
-});
-exports.deletePostFormDelete = asyncHandler(async (req, res, next) => {
-    res.json({ message: "DELETE Delete a Post" });
-});
 exports.postGet = asyncHandler(async (req, res, next) => {
     const post = await Post.findOne({ _id: req.params.postid });
     const commentIds = post.comments.map(comment => comment.toString());
@@ -25,9 +19,6 @@ exports.postGet = asyncHandler(async (req, res, next) => {
         _id: 1,
     });
     res.json({ post, comments });
-});
-exports.updatePostFormPut = asyncHandler(async (req, res, next) => {
-    res.json({ message: "PUT Update a Post" });
 });
 exports.createPostFormPost = [
     asyncHandler(async (req, res, next) => {
