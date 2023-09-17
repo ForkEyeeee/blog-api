@@ -27,6 +27,5 @@ router.post("/users/new", authController.signUpFormPost);
 router.post("/authorSession/new", authController.authorSessionPost);
 
 router.post("/session/new", limiter, authController.loginFormPost);
-router.get("/error", authController.errorPageGet);
 
 module.exports = router;

@@ -7,9 +7,6 @@ const User = require("../models/user");
 const asyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken");
 const Post = require("../models/post");
-exports.createCommentFormGet = asyncHandler(async (req, res, next) => {
-    res.json({ message: "GET Create a Comment" });
-});
 exports.updateCommentFormPut = [
     body("userComment", "edited comment must not be empty.")
         .trim()

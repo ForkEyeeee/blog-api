@@ -8,9 +8,6 @@ const jwt = require("jsonwebtoken");
 const Author = require("../models/author");
 const asyncHandler = require("express-async-handler");
 const Post = require("../models/post");
-exports.errorPageGet = asyncHandler(async (req, res, next) => {
-    res.json({ message: "Incorrect Username or Password" });
-});
 exports.signUpFormPost = [
     body("username", "email must not be empty.")
         .trim()
@@ -60,11 +57,9 @@ exports.signUpFormPost = [
 ];
 exports.loginFormPost = asyncHandler(async (req, res, next) => {
     let { username, password } = req.body;
-    console.log("here");
     let existingUser;
     try {
         existingUser = await User.findOne({ username: username });
-        console.log(existingUser);
     }
     catch (err) {
         const error = new Error("Error! Something went wrong.");
@@ -84,7 +79,6 @@ exports.loginFormPost = asyncHandler(async (req, res, next) => {
     try {
         // Creating jwt token
         token = jwt.sign({ userId: existingUser._id, username: existingUser.username }, process.env.signature, { expiresIn: "30m" });
-        console.log(token);
     }
     catch (err) {
         console.log(err);
@@ -101,7 +95,6 @@ exports.loginFormPost = asyncHandler(async (req, res, next) => {
 });
 exports.authorSessionGet = asyncHandler(async (req, res, next) => {
     const posts = await Post.find({});
-    console.log(req.url);
     res.json({ message: posts });
 });
 exports.authorSessionPost = asyncHandler(async (req, res, next) => {
@@ -130,7 +123,6 @@ exports.authorSessionPost = asyncHandler(async (req, res, next) => {
         token = jwt.sign({ userId: existingUser._id, username: existingUser.username }, process.env.signature, { expiresIn: "30m" });
     }
     catch (err) {
-        console.log(err);
         const error = new Error("Error! Something went wrong.");
         return next(error);
     }

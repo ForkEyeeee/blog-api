@@ -8,12 +8,6 @@ const Author = require("../models/author");
 const asyncHandler = require("express-async-handler");
 const Post = require("../models/post");
 
-exports.errorPageGet = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    res.json({ message: "Incorrect Username or Password" });
-  }
-);
-
 exports.signUpFormPost = [
   body("username", "email must not be empty.")
     .trim()
@@ -69,11 +63,9 @@ exports.signUpFormPost = [
 exports.loginFormPost = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     let { username, password } = req.body;
-    console.log("here");
     let existingUser;
     try {
       existingUser = await User.findOne({ username: username });
-      console.log(existingUser);
     } catch (err) {
       const error = new Error("Error! Something went wrong.");
       return next(error);
@@ -99,7 +91,6 @@ exports.loginFormPost = asyncHandler(
         process.env.signature,
         { expiresIn: "30m" }
       );
-      console.log(token);
     } catch (err) {
       console.log(err);
       const error = new Error("Error! Something went wrong.");
@@ -118,7 +109,6 @@ exports.loginFormPost = asyncHandler(
 exports.authorSessionGet = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const posts = await Post.find({});
-    console.log(req.url);
     res.json({ message: posts });
   }
 );
@@ -156,7 +146,6 @@ exports.authorSessionPost = asyncHandler(
         { expiresIn: "30m" }
       );
     } catch (err) {
-      console.log(err);
       const error = new Error("Error! Something went wrong.");
       return next(error);
     }
