@@ -63,7 +63,7 @@ const CreateCommentForm = () => {
             <Flex justifyContent="center">
               <Button
                 colorScheme="teal"
-                variant="ghost"
+                variant="solid"
                 mt={5}
                 mb={5}
                 type="submit"

@@ -74,7 +74,7 @@ const Login = () => {
         </FormControl>
         <Text color={"red"}>{formError && formError}</Text>
         <Flex justifyContent={"center"}>
-          <Button colorScheme="teal" variant="ghost" mt={10} type="submit">
+          <Button colorScheme="teal" variant="solid" mt={10} type="submit">
             Login
           </Button>
         </Flex>{" "}

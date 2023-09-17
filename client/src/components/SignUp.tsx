@@ -99,7 +99,7 @@ const SignUp = () => {
         </FormControl>
         <Text color="red">{formError && formError}</Text>
         <Flex justifyContent={"center"}>
-          <Button colorScheme="teal" variant="ghost" type="submit">
+          <Button colorScheme="teal" variant="solid" type="submit">
             Create Account
           </Button>
         </Flex>
