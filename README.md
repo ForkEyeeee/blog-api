@@ -57,4 +57,13 @@ Ensure [Node.js](https://nodejs.org/en/download/) and [npm](http://npmjs.com) ar
 
 Visit the application in your browser at the assigned localhost.
 
+## Technology Stack
+- [React](https://reactjs.org/) - JavaScript library for UI building.
+- [Express](https://expressjs.com/) - Web app framework for Node.js.
+- [Chakra UI](https://chakra-ui.com/) for a modular, accessible component library.
+- [MongoDB](https://www.mongodb.com/) as the chosen NoSQL database.
+- [Mongoose](https://mongoosejs.com/) for object data modeling and DB actions.
+- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) for generating and verifying JSON web tokens.
+- [bcrypt](https://www.npmjs.com/package/bcrypt) for secure password hashing.
+- [dotenv](https://www.npmjs.com/package/dotenv) to handle environment variables.
 ---
