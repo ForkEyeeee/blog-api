@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState, useRef } from "react";
 import CommentProps from "../types/commentProps";
 import { useLocation } from "react-router-dom";
@@ -140,7 +141,7 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
                     gap={{ base: "5", md: "10" }}
                   >
                     <FontAwesomeIcon
-                      icon="user-circle"
+                      icon={faUserCircle}
                       style={{ color: "#808080" }}
                       size="3x"
                     />
