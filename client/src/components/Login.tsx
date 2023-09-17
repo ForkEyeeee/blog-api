@@ -16,7 +16,7 @@ const Login = () => {
   const [formError, setFormError] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     const response = await fetch(
       `${import.meta.env.VITE_ENDPOINT}/session/new`,

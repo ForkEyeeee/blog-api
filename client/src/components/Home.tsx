@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useLocation } from "react-router-dom";
 import {
   Box,
@@ -41,7 +42,7 @@ const Home = () => {
 
   return (
     <Box>
-      {data && (
+      {(data as any) && (
         <>
           <Flex justifyContent={"center"}>
             <Heading fontSize={{ base: 22, md: 30 }} pt={10} pb={5}>

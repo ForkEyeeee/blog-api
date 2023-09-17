@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const useDataFetching = (url, token = undefined) => {
+const useDataFetching = (url: string, token = undefined) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -20,7 +20,7 @@ const useDataFetching = (url, token = undefined) => {
         const json = await response.json();
         setData(json);
         setLoading(false);
-      } catch (error) {
+      } catch (error: any) {
         setError(error);
         setLoading(false);
       }

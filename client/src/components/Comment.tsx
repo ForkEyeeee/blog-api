@@ -26,7 +26,7 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [inputText, setInputText] = useState("");
   const [isVisible, setIsVisible] = useState(true);
-  const refContainer = useRef(null);
+  const refContainer: any = useRef(null);
   const toast = useToast();
 
   const token = localStorage.getItem("jwt");
@@ -47,7 +47,7 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
     setInputText(e.target.value);
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const userComment = formData.get("user_comment");
@@ -86,7 +86,7 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
       });
   };
 
-  const handleDelete = async e => {
+  const handleDelete = async (e: any) => {
     e.preventDefault();
     const formData = new FormData(refContainer.current);
     const userComment = formData.get("user_comment");
@@ -140,10 +140,11 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
                     gap={{ base: "5", md: "10" }}
                   >
                     <FontAwesomeIcon
-                      icon={faUserCircle}
+                      icon="user-circle"
                       style={{ color: "#808080" }}
                       size="3x"
                     />
+
                     <Text fontWeight={"bold"}>{comment.username}</Text>
                   </HStack>
                   {parsedToken !== undefined && isExpiredUser ? (
@@ -170,7 +171,7 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
                         <Button
                           type="submit"
                           colorScheme="green"
-                          variant="ghost"
+                          variant="solid"
                           onClick={handleSave}
                         >
                           Save

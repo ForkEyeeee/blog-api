@@ -18,7 +18,7 @@ const CreateCommentForm = () => {
   const parsedToken = parseJwt(token);
   const isExpiredUser = validateToken(parsedToken);
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const comment = formData.get("comment");
