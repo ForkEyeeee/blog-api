@@ -5,9 +5,7 @@ import Comment from "./Comment";
 import CreateCommentForm from "./CreateCommentForm";
 
 const Post = () => {
-  const location = `https://blog-api-backend-iosn.onrender.com/api${
-    useLocation().pathname
-  }`;
+  const location = `${import.meta.env.VITE_ENDPOINT}${useLocation().pathname}`;
   const [data, loading, error] = useDataFetching(location);
 
   if (loading)

@@ -1,8 +1,8 @@
 import { Box, HStack, Flex } from "@chakra-ui/react";
 import { Link as ReactRouterLink } from "react-router-dom";
 import { Link as ChakraLink } from "@chakra-ui/react";
-import parseJwt from "../hooks/parseJWT";
-import validateToken from "../hooks/validateToken";
+import parseJwt from "./utils/parseJWT";
+import validateToken from "./utils/validateToken";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { AiFillHome } from "react-icons/ai";
@@ -12,9 +12,7 @@ import { useState } from "react";
 const NavBar = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("jwt");
-  const location = `https://blog-api-backend-iosn.onrender.com/api${
-    useLocation().pathname
-  }`;
+  const location = `${import.meta.env.VITE_ENDPOINT$}${useLocation().pathname}`;
   const parsedToken = parseJwt(token);
   const isExpiredUser = validateToken(parsedToken);
   const [currentTab, setCurrentTab] = useState("");

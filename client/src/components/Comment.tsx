@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/fontawesome-free-solid";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { GiCancel } from "react-icons/gi";
-import parseJwt from "../hooks/parseJWT";
-import validateToken from "../hooks/validateToken";
+import parseJwt from "./utils/parseJWT";
+import validateToken from "./utils/validateToken";
 import { EditIcon } from "@chakra-ui/icons";
 import {
   Text,
@@ -30,9 +30,7 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
   const toast = useToast();
 
   const token = localStorage.getItem("jwt");
-  const location = `https://blog-api-backend-iosn.onrender.com/api${
-    useLocation().pathname
-  }`;
+  const location = `VITE_BASE_URL${useLocation().pathname}`;
   const parsedToken = parseJwt(token);
   const isExpiredUser = validateToken(parsedToken);
 
@@ -45,7 +43,7 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
     setIsVisible(false);
   };
 
-  const handleInputOnChange = e => {
+  const handleInputOnChange = (e: any) => {
     setInputText(e.target.value);
   };
 

@@ -19,7 +19,7 @@ const Login = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     const response = await fetch(
-      "https://blog-api-backend-iosn.onrender.com/api/session/new",
+      `${import.meta.env.VITE_ENDPOINT}/session/new`,
       {
         method: "POST",
         headers: {

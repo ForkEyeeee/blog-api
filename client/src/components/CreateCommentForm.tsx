@@ -7,15 +7,13 @@ import {
   Button,
   Flex,
 } from "@chakra-ui/react";
-import parseJwt from "../hooks/parseJWT";
-import validateToken from "../hooks/validateToken";
+import parseJwt from "./utils/parseJWT";
+import validateToken from "./utils/validateToken";
 
 const CreateCommentForm = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("jwt");
-  const location = `https://blog-api-backend-iosn.onrender.com/api${
-    useLocation().pathname
-  }`;
+  const location = `${import.meta.env.VITE_ENDPOINT}${useLocation().pathname}`;
   const data = parseJwt(token);
   const parsedToken = parseJwt(token);
   const isExpiredUser = validateToken(parsedToken);
