@@ -19,13 +19,7 @@ app.use(helmet.contentSecurityPolicy({
         "script-src": ["'self'", "code.jquery.com", "cdn.jsdelivr.net"],
     },
 }));
-const RateLimit = require("express-rate-limit");
-const limiter = RateLimit({
-    windowMs: 1 * 60 * 1000,
-    max: 2000,
-});
 app.use(cors());
-app.use(limiter);
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

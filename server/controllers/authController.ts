@@ -80,14 +80,14 @@ exports.loginFormPost = asyncHandler(
     }
 
     if (!existingUser) {
-      const error = new Error("Wrong username");
+      const error = new Error("Wrong username or password");
       return next(error);
     }
 
     // Compare the password using bcrypt
     const isMatch = await bcrypt.compare(password, existingUser.password);
     if (!isMatch) {
-      const error = new Error("Wrong password");
+      const error = new Error("Wrong username or password");
       return next(error);
     }
 
