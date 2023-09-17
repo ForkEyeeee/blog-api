@@ -43,7 +43,7 @@ Ensure [Node.js](https://nodejs.org/en/download/) and [npm](http://npmjs.com) ar
 7. Create a `.env` file in the `client` directory and set the server endpoint. It should look like:
 
    ```
-   VITE_ENDPOINT="http://localhost:5173/api"
+   VITE_ENDPOINT=http://localhost:5173/api
    ```
 
 8. Navigate to the `server` directory and launch the server:
@@ -59,7 +59,7 @@ Ensure [Node.js](https://nodejs.org/en/download/) and [npm](http://npmjs.com) ar
    npm run dev
    ```
 
-Visit the application in your browser at the assigned localhost.
+Visit the application in your browser at http://localhost:5173
 
 ## Technology Stack
 - [React](https://reactjs.org/) - JavaScript library for UI building.
