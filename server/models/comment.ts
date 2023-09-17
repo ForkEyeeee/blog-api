@@ -11,7 +11,7 @@ const CommentSchema = new Schema(
   { collection: "comments" }
 );
 
-CommentSchema.virtual("url").get(function (): string {
+CommentSchema.virtual("url").get(function (this: any): string {
   // We don't use an arrow function as we'll need the this object
   return `${this._id}`;
 });

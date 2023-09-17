@@ -17,7 +17,7 @@ exports.updateCommentFormPut = [
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     } else {
-      const usertoken = req.headers.authorization;
+      const usertoken: any = req.headers.authorization;
       const token = usertoken.split(" ");
       jwt.verify(token[1], process.env.signature);
       await Comment.findOneAndUpdate(
@@ -39,7 +39,7 @@ exports.createCommentFormPost = [
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     } else {
-      const usertoken = req.headers.authorization;
+      const usertoken: any = req.headers.authorization;
       const token = usertoken.split(" ");
       const decoded = jwt.verify(token[1], process.env.signature);
       const newComment = new Comment({
@@ -65,7 +65,7 @@ exports.createCommentFormPost = [
 exports.deleteCommentFormDelete = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const usertoken = req.headers.authorization;
+      const usertoken: any = req.headers.authorization;
       const token = usertoken.split(" ");
       const decoded = jwt.verify(token[1], process.env.signature);
       let { commentId, username } = req.body;

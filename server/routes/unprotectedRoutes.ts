@@ -8,7 +8,7 @@ const RateLimit = require("express-rate-limit");
 const limiter = RateLimit({
   windowMs: 1 * 60 * 1000, // 1 min
   max: 10, // max of 10 requests
-  handler: function (req, res) {
+  handler: function (req: Request, res: Response) {
     res.status(429).json({
       success: false,
       message: "Too many login attempts, please try again after a minute.",

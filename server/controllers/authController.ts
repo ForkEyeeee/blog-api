@@ -17,7 +17,7 @@ exports.signUpFormPost = [
     .trim()
     .isLength({ min: 1 })
     .escape(),
-  body("confirmPassword").custom((value, { req }) => {
+  body("confirmPassword").custom((value: any, { req }: any) => {
     if (value !== req.body.password) {
       throw new Error("Passwords do not match");
     }
@@ -29,7 +29,7 @@ exports.signUpFormPost = [
       const err = new Error(
         errors
           .array()
-          .map(el => el["msg"])
+          .map((el: any) => el["msg"])
           .toString()
       );
 
@@ -162,7 +162,7 @@ exports.authorSessionPost = asyncHandler(
 exports.authorSessionPut = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const usertoken = req.headers.authorization;
+      const usertoken: any = req.headers.authorization;
       const token = usertoken.split(" ");
       jwt.verify(token[1], process.env.signature);
       await Post.findOneAndUpdate(
@@ -179,7 +179,7 @@ exports.authorSessionPut = asyncHandler(
 exports.createPostPost = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const usertoken = req.headers.authorization;
+      const usertoken: any = req.headers.authorization;
       const token = usertoken.split(" ");
       jwt.verify(token[1], process.env.signature);
       const newPost = new Post({

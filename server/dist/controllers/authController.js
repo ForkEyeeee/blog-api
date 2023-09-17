@@ -28,7 +28,7 @@ exports.signUpFormPost = [
         if (!errors.isEmpty()) {
             const err = new Error(errors
                 .array()
-                .map(el => el["msg"])
+                .map((el) => el["msg"])
                 .toString());
             return next(err);
         }

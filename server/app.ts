@@ -41,7 +41,7 @@ function verifyToken(req: Request, res: Response, next: NextFunction) {
   const token = authHeader.split(" ")[1]; // Expecting 'Bearer TOKEN'
   try {
     const decodedToken = jwt.verify(token, process.env.signature);
-    req.userData = decodedToken; // Now, you can access user details via req.userData in routes after this middleware
+    (req as any).userData = decodedToken; // Now, you can access user details via req.userData in routes after this middleware
     next(); // Proceed to next middleware or route handler
   } catch (error) {
     return res.status(401).json({ success: false, message: "Invalid token." });
@@ -72,7 +72,7 @@ app.use(function (err: Error, req: Request, res: Response, next: NextFunction) {
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
   // render the error page
-  res.status(err.status || 500);
+  res.status((err as any).status || 500);
   console.log(err);
   res.json({ message: res.locals.message, success: false });
 });

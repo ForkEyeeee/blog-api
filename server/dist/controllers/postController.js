@@ -11,7 +11,7 @@ exports.postListGet = asyncHandler(async (req, res, next) => {
 });
 exports.postGet = asyncHandler(async (req, res, next) => {
     const post = await Post.findOne({ _id: req.params.postid });
-    const commentIds = post.comments.map(comment => comment.toString());
+    const commentIds = post.comments.map((comment) => comment.toString());
     const comments = await Comment.find({ _id: { $in: commentIds } }).select({
         username: 1,
         content: 1,
