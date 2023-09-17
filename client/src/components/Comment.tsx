@@ -31,7 +31,7 @@ const Comment = ({ comment }: { comment: CommentProps }) => {
   const toast = useToast();
 
   const token = localStorage.getItem("jwt");
-  const location = `VITE_BASE_URL${useLocation().pathname}`;
+  const location = `${import.meta.env.VITE_ENDPOINT}${useLocation().pathname}`;
   const parsedToken = parseJwt(token);
   const isExpiredUser = validateToken(parsedToken);
 
