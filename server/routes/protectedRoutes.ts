@@ -1,15 +1,14 @@
 var express = require("express");
 var router = express.Router();
-const comment_controller = require("../controllers/comment_controller");
-const auth_controller = require("../controllers/auth_controller");
+const commentController = require("../controllers/commentController");
+const authController = require("../controllers/authController");
 
-router.post("/posts/:postid", comment_controller.create_comment_form_post);
-router.put("/posts/:postid", comment_controller.update_comment_form_put);
+router.post("/posts/:postid", commentController.createCommentFormPost);
+router.put("/posts/:postid", commentController.updateCommentFormPut);
+router.delete("/posts/:postid", commentController.deleteCommentFormDelete);
 
-router.delete("/posts/:postid", comment_controller.delete_comment_form_delete);
-
-router.get("/authorsession/posts", auth_controller.authorsession_get);
-router.put("/authorsession/posts", auth_controller.authorsession_put);
-router.post("/authorsession/posts", auth_controller.create_post_post);
+router.get("/authorSession/posts", authController.authorSessionGet);
+router.put("/authorSession/posts", authController.authorSessionPut);
+router.post("/authorSession/posts", authController.createPostPost);
 
 module.exports = router;

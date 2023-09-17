@@ -5,7 +5,7 @@ const Comment = require("../models/comment");
 
 const asyncHandler = require("express-async-handler");
 
-exports.post_list_get = asyncHandler(
+exports.postListGet = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const posts = await Post.find({});
     console.log(req.url);
@@ -13,19 +13,19 @@ exports.post_list_get = asyncHandler(
   }
 );
 
-exports.delete_post_form_get = asyncHandler(
+exports.deletePostFormGet = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     res.json({ message: "GET Delete a Post" });
   }
 );
 
-exports.delete_post_form_delete = asyncHandler(
+exports.deletePostFormDelete = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     res.json({ message: "DELETE Delete a Post" });
   }
 );
 
-exports.post_get = asyncHandler(
+exports.postGet = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const post = await Post.findOne({ _id: req.params.postid });
     const commentIds = post.comments.map(comment => comment.toString());
@@ -39,13 +39,13 @@ exports.post_get = asyncHandler(
   }
 );
 
-exports.update_post_form_put = asyncHandler(
+exports.updatePostFormPut = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     res.json({ message: "PUT Update a Post" });
   }
 );
 
-exports.create_post_form_post = [
+exports.createPostFormPost = [
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const newPost = new Post({
       title: req.body.title,

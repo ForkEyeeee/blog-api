@@ -1,22 +1,21 @@
 import { Request, Response, NextFunction } from "express";
 var express = require("express");
 var router = express.Router();
-const post_controller = require("../controllers/post_controller");
-const auth_controller = require("../controllers/auth_controller");
+const postController = require("../controllers/postController");
+const authController = require("../controllers/authController");
 
-/* GET home page. */
 router.get("/", (req: Request, res: Response, next: NextFunction) => {
   console.log(req.query);
   res.redirect("posts");
 });
 
-router.get("/posts", post_controller.post_list_get);
-router.get("/posts/:postid", post_controller.post_get);
+router.get("/posts", postController.postListGet);
+router.get("/posts/:postid", postController.postGet);
 
-router.post("/users/new", auth_controller.sign_up_form_post);
-router.post("/authorsession/new", auth_controller.authorsession_post);
+router.post("/users/new", authController.signUpFormPost);
+router.post("/authorSession/new", authController.authorSessionPost);
 
-router.post("/session/new", auth_controller.login_form_post);
-router.get("/error", auth_controller.error_page_get);
+router.post("/session/new", authController.loginFormPost);
+router.get("/error", authController.errorPageGet);
 
 module.exports = router;

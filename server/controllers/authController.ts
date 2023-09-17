@@ -8,13 +8,13 @@ const Author = require("../models/author");
 const asyncHandler = require("express-async-handler");
 const Post = require("../models/post");
 
-exports.error_page_get = asyncHandler(
+exports.errorPageGet = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     res.json({ message: "Incorrect Username or Password" });
   }
 );
 
-exports.sign_up_form_post = [
+exports.signUpFormPost = [
   body("username", "email must not be empty.")
     .trim()
     .isLength({ min: 1 })
@@ -66,7 +66,7 @@ exports.sign_up_form_post = [
   }),
 ];
 
-exports.login_form_post = asyncHandler(
+exports.loginFormPost = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     let { username, password } = req.body;
     console.log("here");
@@ -115,7 +115,7 @@ exports.login_form_post = asyncHandler(
   }
 );
 
-exports.authorsession_get = asyncHandler(
+exports.authorSessionGet = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const posts = await Post.find({});
     console.log(req.url);
@@ -123,7 +123,7 @@ exports.authorsession_get = asyncHandler(
   }
 );
 
-exports.authorsession_post = asyncHandler(
+exports.authorSessionPost = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     let { username, password } = req.body;
 
@@ -134,7 +134,6 @@ exports.authorsession_post = asyncHandler(
       const error = new Error("Error! Something went wrong.");
       return next(error);
     }
-    console.log(existingUser);
 
     if (!existingUser) {
       const error = new Error("Wrong username");
@@ -156,7 +155,6 @@ exports.authorsession_post = asyncHandler(
         process.env.signature,
         { expiresIn: "30m" }
       );
-      console.log(token);
     } catch (err) {
       console.log(err);
       const error = new Error("Error! Something went wrong.");
@@ -169,25 +167,27 @@ exports.authorsession_post = asyncHandler(
         token: token,
       },
     });
-    // res.redirect("/authorsession/posts");
   }
 );
 
-exports.authorsession_put = asyncHandler(
+exports.authorSessionPut = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const usertoken = req.headers.authorization;
-    const token = usertoken.split(" ");
-    jwt.verify(token[1], process.env.signature);
-    console.log(req.body);
-    await Post.findOneAndUpdate(
-      { _id: req.body.postid },
-      { published: req.body.published === "true" ? true : false }
-    );
-    res.json({ Message: "Comment updated" });
+    try {
+      const usertoken = req.headers.authorization;
+      const token = usertoken.split(" ");
+      jwt.verify(token[1], process.env.signature);
+      await Post.findOneAndUpdate(
+        { _id: req.body.postid },
+        { published: req.body.published === "true" ? true : false }
+      );
+      res.json({ Message: "Comment updated" });
+    } catch (error) {
+      res.json({ Message: error });
+    }
   }
 );
 
-exports.create_post_post = asyncHandler(
+exports.createPostPost = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const usertoken = req.headers.authorization;
     const token = usertoken.split(" ");

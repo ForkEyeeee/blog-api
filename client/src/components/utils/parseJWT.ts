@@ -1,5 +1,5 @@
 const parseJwt = tokenData => {
-  if (tokenData === "undefined" || tokenData === null) {
+  if (typeof tokenData === "undefined" || tokenData === null) {
     return;
   }
   const base64Url = tokenData.split(".")[1];

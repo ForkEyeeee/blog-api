@@ -7,13 +7,13 @@ const asyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken");
 const Post = require("../models/post");
 
-exports.create_comment_form_get = asyncHandler(
+exports.createCommentFormGet = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     res.json({ message: "GET Create a Comment" });
   }
 );
 
-exports.update_comment_form_put = [
+exports.updateCommentFormPut = [
   body("userComment", "edited comment must not be empty.")
     .trim()
     .isLength({ min: 1 })
@@ -35,7 +35,7 @@ exports.update_comment_form_put = [
   }),
 ];
 
-exports.create_comment_form_post = [
+exports.createCommentFormPost = [
   body("comment", "new comment must not be empty.")
     .trim()
     .isLength({ min: 1 })
@@ -68,7 +68,7 @@ exports.create_comment_form_post = [
   }),
 ];
 
-exports.delete_comment_form_delete = asyncHandler(
+exports.deleteCommentFormDelete = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     let { usercomment, commentId } = req.body;
     await Comment.deleteOne({ _id: commentId });
@@ -76,7 +76,7 @@ exports.delete_comment_form_delete = asyncHandler(
   }
 );
 
-exports.comment_list_get = asyncHandler(
+exports.commentListGet = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     res.json({ message: "GET Comment List" });
   }
