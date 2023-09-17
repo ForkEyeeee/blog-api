@@ -136,14 +136,14 @@ exports.authorSessionPost = asyncHandler(
     }
 
     if (!existingUser) {
-      const error = new Error("Wrong username");
+      const error = new Error("Wrong username or password.");
       return next(error);
     }
 
     // Compare the password using bcrypt
     const isMatch = await bcrypt.compare(password, existingUser.password);
     if (!isMatch) {
-      const error = new Error("Wrong password");
+      const error = new Error("Wrong username or password.");
       return next(error);
     }
 
@@ -189,18 +189,21 @@ exports.authorSessionPut = asyncHandler(
 
 exports.createPostPost = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const usertoken = req.headers.authorization;
-    const token = usertoken.split(" ");
-    jwt.verify(token[1], process.env.signature);
-    console.log(req.body);
-    const newPost = new Post({
-      title: req.body.title,
-      content: req.body.content,
-      comments: [],
-      time: new Date().toJSON().slice(0, 10).split("-").reverse().join("/"),
-      published: false,
-    });
-    await newPost.save();
-    res.json({ Message: "post added" });
+    try {
+      const usertoken = req.headers.authorization;
+      const token = usertoken.split(" ");
+      jwt.verify(token[1], process.env.signature);
+      const newPost = new Post({
+        title: req.body.title,
+        content: req.body.content,
+        comments: [],
+        time: new Date().toJSON().slice(0, 10).split("-").reverse().join("/"),
+        published: false,
+      });
+      await newPost.save();
+      res.json({ Message: "post added" });
+    } catch (error) {
+      res.json({ Message: error });
+    }
   }
 );
