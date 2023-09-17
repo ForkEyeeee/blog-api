@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useState, useRef } from "react";
 import CommentProps from "../types/commentProps";
 import { useLocation } from "react-router-dom";

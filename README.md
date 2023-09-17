@@ -40,7 +40,11 @@ Ensure [Node.js](https://nodejs.org/en/download/) and [npm](http://npmjs.com) ar
    signature="your_hashed_password"
    ```
 
-7. Navigate to the `client/src/components` and `client/src/hooks` directories. Update any API call URLs to point to your own local server.
+7. Create a `.env` file in the `client` directory and set the server endpoint. It should look like:
+
+   ```
+   VITE_ENDPOINT="http://localhost:5173/api"
+   ```
 
 8. Navigate to the `server` directory and launch the server:
 
@@ -66,4 +70,5 @@ Visit the application in your browser at the assigned localhost.
 - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) for generating and verifying JSON web tokens.
 - [bcrypt](https://www.npmjs.com/package/bcrypt) for secure password hashing.
 - [dotenv](https://www.npmjs.com/package/dotenv) to handle environment variables.
+
 ---
